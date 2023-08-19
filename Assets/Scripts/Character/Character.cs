@@ -15,9 +15,10 @@ public class Character : MonoBehaviour
 	private GameObject m_WeaponObject;
 	private SpriteRenderer m_WeaponSprite;
 
-	[Header("Renderer")]
-	[SerializeField]
-	private Sprite m_Sprite;
+	private GameObject m_SweepObject;
+	private SpriteRenderer m_SweepSprite;
+
+	public Weapon m_Weapon;
 
 	[Header("Movement")]
 	[SerializeField]
@@ -34,6 +35,8 @@ public class Character : MonoBehaviour
 	private float m_MaxHealth = 100;
 	[SerializeField]
 	private GameObject m_BloodPartical;
+	[SerializeField]
+	private float m_KnockbackScale = 1;
 
 	private float m_Health;
 	private Vector2 m_LookDirection = new Vector2(0, 0);
@@ -43,6 +46,10 @@ public class Character : MonoBehaviour
 	[HideInInspector]
 	public UnityEvent m_DamageEvent = new UnityEvent();
 
+	private float m_NextAttackTime;
+
+	private float m_DisableSweepSpritTime;
+
 	// Start is called before the first frame update
 	private void Start()
 	{
@@ -51,7 +58,13 @@ public class Character : MonoBehaviour
 		m_WeaponObject = new GameObject();
 		m_WeaponObject.transform.parent = transform;
 		m_WeaponSprite = m_WeaponObject.AddComponent<SpriteRenderer>();
-		m_WeaponSprite.sprite = m_Sprite;
+		m_WeaponSprite.sprite = m_Weapon.WeaponSprite;
+
+		m_SweepObject = new GameObject();
+		m_SweepObject.transform.parent = transform;
+		m_SweepSprite = m_SweepObject.AddComponent<SpriteRenderer>();
+		m_SweepSprite.sprite = m_Weapon.SweepSprite;
+		m_SweepObject.SetActive(false);
 
 		// renderer
 		m_Renderer = GetComponent<SpriteRenderer>();
@@ -62,9 +75,10 @@ public class Character : MonoBehaviour
 
 		m_Collider.radius = 0.5f;
 
-		m_Rigidbody.bodyType = RigidbodyType2D.Kinematic;
+		m_Rigidbody.bodyType = RigidbodyType2D.Dynamic;
 		m_Rigidbody.interpolation = RigidbodyInterpolation2D.None;
 		m_Rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+		m_Rigidbody.gravityScale = 0;
 	}
 
 	// Update is called once per frame
@@ -72,14 +86,23 @@ public class Character : MonoBehaviour
 	{
 		float speed = m_IsRunning ? m_RunSpeed : m_WalkSpeed;
 
-		m_WeaponObject.transform.localPosition = m_LookDirection * 0.5f;
-		//m_WeaponObject.transform.rotation = Quaternion
+
+		float weaponAngle = Vector2.SignedAngle(Vector2.right, m_LookDirection);
+		m_SweepObject.transform.position = m_LookDirection * 0.5f;
+		m_SweepObject.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.forward);
+
+		if (Time.time >= m_DisableSweepSpritTime)
+			m_SweepObject.SetActive(false);
+
+		weaponAngle += m_Weapon.SweepingAngle * 0.5f * (m_WeaponSprite.flipX ? -1 : 1);
+		m_WeaponObject.transform.localPosition = new Vector2(Mathf.Cos(weaponAngle * Mathf.Deg2Rad), Mathf.Sin(weaponAngle * Mathf.Deg2Rad)) * 0.5f;
+		m_WeaponObject.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.forward);
 
 		if (m_MovementDirection.sqrMagnitude >= 0.001f)
 		{
 			m_Renderer.flipX = Vector2.Dot(m_MovementDirection, Vector2.left) > 0;
 
-			m_Rigidbody.velocity = m_MovementDirection * speed;
+			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 0.2f);
 		}
 		else
 			m_Rigidbody.velocity = Vector2.zero;
@@ -101,12 +124,14 @@ public class Character : MonoBehaviour
 		m_LookDirection = direction.normalized;
 	}
 
-	public void Damage(float damage)
+	public void Damage(float damage, Vector2 knockback)
 	{
 		m_Health -= damage;
 		m_Health = Mathf.Clamp(m_Health, 0, m_MaxHealth);
 
-		GameObject bloodPartical = Instantiate(m_BloodPartical);
+		m_Rigidbody.AddForce(knockback * m_KnockbackScale, ForceMode2D.Impulse);
+
+		GameObject bloodPartical = Instantiate(m_BloodPartical, transform);
 		Destroy(bloodPartical, 5);
 
 		m_DamageEvent.Invoke();
@@ -117,7 +142,29 @@ public class Character : MonoBehaviour
 
 	public void Attack()
 	{
-		// TODO
+		if (Time.time >= m_NextAttackTime)
+		{
+			m_NextAttackTime = Time.time + m_Weapon.AttackSpeed;
+
+			m_WeaponSprite.flipX = !m_WeaponSprite.flipX;
+			m_SweepObject.SetActive(true);
+			m_DisableSweepSpritTime = Time.time + 0.1f;
+
+			Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, m_Weapon.AttackRange);
+
+			foreach (var collision in collisions)
+			{
+				Character charComp = collision.GetComponent<Character>();
+				if (charComp != null && charComp != this)
+				{
+					Vector2 dir = (collision.transform.position - transform.position).normalized;
+
+					float angle = Vector2.Angle(m_LookDirection, dir);
+					if(angle <= m_Weapon.SweepingAngle/2)
+						charComp.Damage(m_Weapon.Damage, m_Weapon.Knockback * dir);
+				}
+			}
+		}
 	}
 
 }
