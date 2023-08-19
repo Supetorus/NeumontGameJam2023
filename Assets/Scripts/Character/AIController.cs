@@ -43,7 +43,7 @@ public class AIController : MonoBehaviour
 
 	private void Update()
 	{
-		character.SetWeaponEnabled(isAggro);
+		character.SetWeaponEnabled(isAggro && !flees);
 		if (isDead) return;
 		Vector2 moveDirection;
 		float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
