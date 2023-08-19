@@ -12,6 +12,8 @@ public class AIController : MonoBehaviour
 	private float aggroAlertRadius;
 	[SerializeField, Tooltip("How close this character has to be to the player to attack")]
 	private float minAttackDistance = 1;
+	[SerializeField, Tooltip("How long the AI has to wait before it's first attack when it's in range")]
+	private float firstAttackDelay = 0.1f;
 	[SerializeField, Tooltip("How much the direction can change while wandering, ie how wildly the ai wanders."), Range(0, 180)]
 	private float directionChangeRange = 15;
 	[SerializeField, Tooltip("Disable wandering for testing")]
@@ -22,12 +24,13 @@ public class AIController : MonoBehaviour
 	private GameObject player;
 	private float currentAngle;
 	private bool isDead;
+	private float firstAttackTimer = 0;
 
 	private static EnemyManager enemyManager;
 
 	private void Start()
 	{
-		if(enemyManager == null) { enemyManager =  FindFirstObjectByType<EnemyManager>(); }
+		if (enemyManager == null) { enemyManager = FindFirstObjectByType<EnemyManager>(); }
 
 		currentAngle = Random.Range(0, 180);
 		character = GetComponent<Character>();
@@ -49,7 +52,18 @@ public class AIController : MonoBehaviour
 			Vector2 toPlayer = player.transform.position - transform.position;
 			moveDirection = flees ? -toPlayer : toPlayer;
 
-			if (!flees && distToPlayer < minAttackDistance) character.Attack();
+			if (!flees && distToPlayer < minAttackDistance)
+			{
+				firstAttackTimer += Time.deltaTime;
+				if (firstAttackTimer > firstAttackDelay)
+				{
+					character.Attack();
+				}
+			}
+			else
+			{
+				firstAttackTimer = 0;
+			}
 		}
 		else if (doWander)
 		{
