@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weapon:
     SweepingAngle: 45
-    Damage: 10
+    Damage: 5
     Knockback: 2
     AttackSpeed: 0.5
     AttackRange: 1

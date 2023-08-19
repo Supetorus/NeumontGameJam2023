@@ -3194,41 +3194,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - SweepingAngle: 0
-    Damage: 0
-    Knockback: 0
-    AttackSpeed: 0
-    AttackRange: 0
+  - SweepingAngle: 120
+    Damage: 80
+    Knockback: 10
+    AttackSpeed: 1
+    AttackRange: 1.5
     WeaponSprite: {fileID: 21300000, guid: e84c6c1d11509d54181b32be13cc95cd, type: 3}
-    SweepSprite: {fileID: 0}
-  - SweepingAngle: 0
-    Damage: 0
-    Knockback: 0
-    AttackSpeed: 0
-    AttackRange: 0
+    SweepSprite: {fileID: 21300000, guid: 52797bbbf3b944445b63b99ab7c311ab, type: 3}
+  - SweepingAngle: 120
+    Damage: 60
+    Knockback: 15
+    AttackSpeed: 1
+    AttackRange: 1.5
     WeaponSprite: {fileID: 21300000, guid: 48021c375cfac4241a8600f235f39715, type: 3}
-    SweepSprite: {fileID: 0}
-  - SweepingAngle: 0
-    Damage: 0
-    Knockback: 0
-    AttackSpeed: 0
-    AttackRange: 0
+    SweepSprite: {fileID: 21300000, guid: 52797bbbf3b944445b63b99ab7c311ab, type: 3}
+  - SweepingAngle: 30
+    Damage: 25
+    Knockback: 5
+    AttackSpeed: 0.1
+    AttackRange: 1
     WeaponSprite: {fileID: 21300000, guid: 71b3b2390ddd00e4c9488cef0cc9cce3, type: 3}
-    SweepSprite: {fileID: 0}
-  - SweepingAngle: 0
-    Damage: 0
-    Knockback: 0
-    AttackSpeed: 0
-    AttackRange: 0
-    WeaponSprite: {fileID: 21300000, guid: 6f4e854625a18574b914f7cf70f75f4e, type: 3}
-    SweepSprite: {fileID: 0}
-  - SweepingAngle: 0
-    Damage: 0
-    Knockback: 0
-    AttackSpeed: 0
-    AttackRange: 0
+    SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
+  - SweepingAngle: 45
+    Damage: 40
+    Knockback: 7
+    AttackSpeed: 0.3
+    AttackRange: 1
     WeaponSprite: {fileID: 21300000, guid: 7c77999ca74f87249b2ed18881a24953, type: 3}
-    SweepSprite: {fileID: 0}
+    SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
+  - SweepingAngle: 90
+    Damage: 50
+    Knockback: 8
+    AttackSpeed: 0.3
+    AttackRange: 1.5
+    WeaponSprite: {fileID: 21300000, guid: 8290cae9271fb4948acd9a9b97816225, type: 3}
+    SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
   weaponOptions:
   - {fileID: 1606610990}
   - {fileID: 1741323541}

@@ -252,13 +252,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Weapon:
-    SweepingAngle: 180
-    Damage: 10
-    Knockback: 10
-    AttackSpeed: 0
+    SweepingAngle: 30
+    Damage: 30
+    Knockback: 5
+    AttackSpeed: 0.3
     AttackRange: 1
-    WeaponSprite: {fileID: 21300000, guid: 48021c375cfac4241a8600f235f39715, type: 3}
-    SweepSprite: {fileID: 21300000, guid: 52797bbbf3b944445b63b99ab7c311ab, type: 3}
+    WeaponSprite: {fileID: 21300000, guid: 6f4e854625a18574b914f7cf70f75f4e, type: 3}
+    SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
   m_WalkSpeed: 4
   m_RunSpeed: 8
   m_MaxHealth: 100
