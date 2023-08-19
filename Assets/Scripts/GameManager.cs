@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	private HUD hud;
+	private Shop shop;
 
 	[SerializeField] private GameObject playerPrefab;
 	public GameObject Player { get; private set; }
@@ -24,23 +25,52 @@ public class GameManager : MonoBehaviour
 		if(Instance == null) { Instance = this; DontDestroyOnLoad(this); }
 	}
 
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.P))
+		{
+			OpenShop();
+		}
+		else if(Input.GetKeyDown(KeyCode.O))
+		{
+			CloseShop();
+		}
+	}
+
 	public void OnSceneLoad(Scene scene, LoadSceneMode mode)
 	{
 		if(scene.name == "Game")
 		{
 			Player = Instantiate(playerPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+			hud = FindFirstObjectByType<HUD>();
+			shop = FindFirstObjectByType<Shop>();
+			shop.gameObject.SetActive(false);
 		}
 	}
 
 	public void SetHealth(float percent)
 	{
-		if(hud == null) { hud = FindFirstObjectByType<HUD>(); }
 		hud.SetHealth(percent);
 	}
 
 	public void AddScore()
 	{
-		if (hud == null) { hud = FindFirstObjectByType<HUD>(); }
 		hud.SetScore(++score);
+
+		if(score == 10) { OpenShop(); }
+	}
+
+	public void OpenShop()
+	{
+		Time.timeScale = 0.0f;
+
+		shop.gameObject.SetActive(true);
+	}
+
+	public void CloseShop()
+	{
+		Time.timeScale = 1.0f;
+
+		shop.gameObject.SetActive(false);
 	}
 }
