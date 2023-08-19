@@ -32,6 +32,8 @@ public class Shop : MonoBehaviour
 
 	public void ChooseWeapon(Weapon weapon)
 	{
-		Debug.Log(weapon.WeaponSprite.name);
+		GameManager.Instance.Player.GetComponent<Character>().m_Weapon = weapon;
+
+		GameManager.Instance.CloseShop();
 	}
 }
