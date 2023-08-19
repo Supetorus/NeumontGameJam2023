@@ -251,11 +251,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529df90da2bea7f4f89a41a5cc0e8628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 7482667652216324306, guid: d8bba65f069cec242a1fd2c498f51db2, type: 3}
+  m_Weapon:
+    SweepingAngle: 0
+    Damage: 0
+    Knockback: 0
+    AttackSpeed: 0
+    AttackRange: 0
+    WeaponSprite: {fileID: 7482667652216324306, guid: d8bba65f069cec242a1fd2c498f51db2, type: 3}
+    SweepSprite: {fileID: 7482667652216324306, guid: d8bba65f069cec242a1fd2c498f51db2, type: 3}
   m_WalkSpeed: 2
   m_RunSpeed: 4
   m_MaxHealth: 100
-  m_BloodPartical: {fileID: 0}
+  m_BloodPartical: {fileID: 6361710182740195663, guid: c379e8677ef81b347892790d4f96dd4b, type: 3}
+  m_KnockbackScale: 1
   m_DeathEvent:
     m_PersistentCalls:
       m_Calls: []

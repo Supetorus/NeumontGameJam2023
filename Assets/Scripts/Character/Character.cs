@@ -88,7 +88,7 @@ public class Character : MonoBehaviour
 
 
 		float weaponAngle = Vector2.SignedAngle(Vector2.right, m_LookDirection);
-		m_SweepObject.transform.position = m_LookDirection * 0.5f;
+		m_SweepObject.transform.localPosition = m_LookDirection * 0.5f;
 		m_SweepObject.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.forward);
 
 		if (Time.time >= m_DisableSweepSpritTime)
