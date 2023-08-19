@@ -137,6 +137,8 @@ public class GameManager : MonoBehaviour
 	{
 		Paused = false;
 		InShop = false;
+		Score = 0;
+		scoreGoal = 5;
 
 		Time.timeScale = 1.0f;
 		shop.gameObject.SetActive(true);
