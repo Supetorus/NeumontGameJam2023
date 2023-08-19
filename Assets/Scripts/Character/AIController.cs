@@ -10,6 +10,8 @@ public class AIController : MonoBehaviour
 	private bool flees;
 	[SerializeField, Tooltip("How far away from this AI other AI will become aggro")]
 	private float aggroAlertRadius;
+	[SerializeField, Tooltip("How close this character has to be to the player to attack")]
+	private float minAttackDistance = 1;
 	[SerializeField, Tooltip("How much the direction can change while wandering, ie how wildly the ai wanders."), Range(0, 180)]
 	private float directionChangeRange = 15;
 	[SerializeField, Tooltip("Disable wandering for testing")]
@@ -35,6 +37,7 @@ public class AIController : MonoBehaviour
 		{
 			Vector2 toPlayer = player.transform.position - transform.position;
 			moveDirection = flees ? -toPlayer : toPlayer;
+			if (!flees && Vector3.Distance(transform.position, player.transform.position) < minAttackDistance) character.Attack();
 		}
 		else if (doWander)
 		{

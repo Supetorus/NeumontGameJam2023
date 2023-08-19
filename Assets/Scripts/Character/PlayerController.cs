@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Character))]
@@ -28,5 +29,8 @@ public class PlayerController : MonoBehaviour
 		m_Character.Move(movDir);
 		m_Character.SetSprint(sprint);
 		m_Character.SetLookDirection(lookDir);
+
+		if(Input.GetMouseButtonDown(0))
+			m_Character.Attack();
 	}
 }
