@@ -32,7 +32,7 @@ public class Shop : MonoBehaviour
 
 	public void ChooseWeapon(Weapon weapon)
 	{
-		GameManager.Instance.Player.GetComponent<Character>().m_Weapon = weapon;
+		GameManager.Instance.Player.GetComponent<Character>().SetWeapon(weapon);
 
 		GameManager.Instance.CloseShop();
 	}
