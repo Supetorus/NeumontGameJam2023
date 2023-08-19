@@ -256,6 +256,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62758989}
   m_CullTransparentMesh: 1
+--- !u!1 &383176358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 383176359}
+  - component: {fileID: 383176360}
+  m_Layer: 0
+  m_Name: WorldManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &383176359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383176358}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.3009186, y: -16.26086, z: 0.048522145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383176360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383176358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ff617b090c01242ae03c2f50c29790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1622187518}
+  tilePrefabs:
+  - {fileID: 4801383790354780530, guid: 632e775b83de0164ba2038e28b3d8ae9, type: 3}
+  - {fileID: 4801383790354780530, guid: 4e439dd9a67ee3a40ab217806204b2d8, type: 3}
+  - {fileID: 4801383790354780530, guid: 4e439dd9a67ee3a40ab217806204b2d8, type: 3}
 --- !u!1 &459548720
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +877,7 @@ GameObject:
   - component: {fileID: 1622187518}
   - component: {fileID: 1622187517}
   - component: {fileID: 1622187516}
+  - component: {fileID: 1622187519}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -909,6 +959,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1622187519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622187515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec57816586401e243b115e600950cca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rotSpeed: 1
 --- !u!1 &1666458669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,3 +1143,4 @@ SceneRoots:
   - {fileID: 2063738648}
   - {fileID: 1117750583}
   - {fileID: 1666458670}
+  - {fileID: 383176359}
