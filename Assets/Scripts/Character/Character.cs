@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -37,6 +38,8 @@ public class Character : MonoBehaviour
 	private GameObject m_BloodPartical;
 	[SerializeField]
 	private float m_KnockbackScale = 1;
+	[SerializeField, Tooltip("The slider representing the health of this character")]
+	private Slider healthSlider;
 
 	private float m_Health;
 	private Vector2 m_LookDirection = new Vector2(0, 0);
@@ -89,6 +92,7 @@ public class Character : MonoBehaviour
 	private void Update()
 	{
 		float speed = m_IsRunning ? m_RunSpeed : m_WalkSpeed;
+		if (healthSlider != null) healthSlider.value = m_Health / m_MaxHealth;
 
 
 		float weaponAngle = Vector2.SignedAngle(Vector2.right, m_LookDirection);
