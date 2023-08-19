@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 		m_Character = GetComponent<Character>();
 
 		m_Character.m_ComponentFilter = new System.Type[] { typeof(AIController) };
+
+		m_Character.m_DeathEvent.AddListener(Death);
 	}
 
 	// Update is called once per frame
@@ -35,5 +37,10 @@ public class PlayerController : MonoBehaviour
 			m_Character.Attack();
 
 		GameManager.Instance.SetHealth(m_Character.GetHealthPercent());
+	}
+
+	void Death()
+	{
+		GameManager.Instance.OnDeath();
 	}
 }

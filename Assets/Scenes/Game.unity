@@ -3243,6 +3243,7 @@ GameObject:
   - component: {fileID: 1963235511}
   - component: {fileID: 1963235510}
   - component: {fileID: 1963235509}
+  - component: {fileID: 1963235513}
   m_Layer: 5
   m_Name: Death
   m_TagString: Untagged
@@ -3333,6 +3334,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1963235513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963235508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e8e6a1ab6d8be4e9d2f1cb181e223f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2098172679
 GameObject:
   m_ObjectHideFlags: 0
