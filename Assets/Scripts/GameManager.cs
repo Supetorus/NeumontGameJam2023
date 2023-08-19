@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
+		//TODO: Remove, for debug use
 		if(Input.GetKeyDown(KeyCode.P))
 		{
 			OpenShop();

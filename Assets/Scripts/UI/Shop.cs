@@ -36,4 +36,11 @@ public class Shop : MonoBehaviour
 
 		GameManager.Instance.CloseShop();
 	}
+
+	public void Heal()
+	{
+		GameManager.Instance.Player.GetComponent<Character>().Heal();
+
+		GameManager.Instance.CloseShop();
+	}
 }
