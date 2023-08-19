@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject playerPrefab;
 	public GameObject Player { get; private set; }
 
-	private int score = 0;
+	public int Score { get; private set; } = 0;
 
 	private int scoreGoal = 5;
 
@@ -92,9 +92,9 @@ public class GameManager : MonoBehaviour
 
 	public void AddScore()
 	{
-		hud.SetScore(++score);
+		hud.SetScore(++Score);
 
-		if(score == scoreGoal) { OpenShop(); scoreGoal *= 2; }
+		if(Score == scoreGoal) { OpenShop(); scoreGoal *= 2; }
 	}
 
 	public void OpenShop()
@@ -137,6 +137,8 @@ public class GameManager : MonoBehaviour
 	{
 		Paused = false;
 		InShop = false;
+		Score = 0;
+		scoreGoal = 5;
 
 		Time.timeScale = 1.0f;
 		shop.gameObject.SetActive(true);

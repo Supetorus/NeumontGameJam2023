@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
 
 	void Update()
 	{
-		int maxEnemies = (int)(MAX_ENEMIES + Time.realtimeSinceStartup / 12.0f);
+		int maxEnemies = MAX_ENEMIES + GameManager.Instance.Score / 10;
 
 		Vector3 pos = manager.Player.transform.position;
 
@@ -72,5 +72,10 @@ public class EnemyManager : MonoBehaviour
 	{
 		enemies.Remove(enemy);
 		GameManager.Instance.AddScore();
+	}
+
+	public void Despawn(GameObject enemy)
+	{
+		enemies.Remove(enemy);
 	}
 }
