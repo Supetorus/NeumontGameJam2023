@@ -65,11 +65,13 @@ public class Character : MonoBehaviour
 		m_WeaponObject.transform.parent = transform;
 		m_WeaponSprite = m_WeaponObject.AddComponent<SpriteRenderer>();
 		m_WeaponSprite.sprite = m_Weapon.WeaponSprite;
+		m_WeaponSprite.sortingOrder = 1;
 
 		m_SweepObject = new GameObject();
 		m_SweepObject.transform.parent = transform;
 		m_SweepSprite = m_SweepObject.AddComponent<SpriteRenderer>();
 		m_SweepSprite.sprite = m_Weapon.SweepSprite;
+		m_SweepSprite.sortingOrder = 2;
 		m_SweepObject.SetActive(false);
 
 		// renderer
@@ -97,20 +99,20 @@ public class Character : MonoBehaviour
 
 		float weaponAngle = Vector2.SignedAngle(Vector2.right, m_LookDirection);
 		m_SweepObject.transform.localPosition = m_LookDirection * 0.5f;
-		m_SweepObject.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.forward);
+		m_SweepObject.transform.rotation = Quaternion.AngleAxis(weaponAngle - 90, Vector3.forward);
 
 		if (Time.time >= m_DisableSweepSpritTime)
 			m_SweepObject.SetActive(false);
 
 		weaponAngle += m_Weapon.SweepingAngle * 0.5f * (m_WeaponSprite.flipX ? -1 : 1);
 		m_WeaponObject.transform.localPosition = new Vector2(Mathf.Cos(weaponAngle * Mathf.Deg2Rad), Mathf.Sin(weaponAngle * Mathf.Deg2Rad)) * 0.5f;
-		m_WeaponObject.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.forward);
+		m_WeaponObject.transform.rotation = Quaternion.AngleAxis(weaponAngle - 90, Vector3.forward);
 
 		if (m_MovementDirection.sqrMagnitude >= 0.001f)
 		{
 			m_Renderer.flipX = Vector2.Dot(m_MovementDirection, Vector2.left) > 0;
 
-			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 2.0f * Time.deltaTime);
+			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 4.0f * Time.deltaTime);
 		}
 		else
 			m_Rigidbody.velocity = Vector2.zero;
@@ -170,6 +172,7 @@ public class Character : MonoBehaviour
 		{
 			m_NextAttackTime = Time.time + m_Weapon.AttackSpeed;
 
+			m_SweepSprite.flipX = m_WeaponSprite.flipX;
 			m_WeaponSprite.flipX = !m_WeaponSprite.flipX;
 			m_SweepObject.SetActive(true);
 			m_DisableSweepSpritTime = Time.time + 0.1f;

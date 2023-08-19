@@ -153,15 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs:
-  - {fileID: 2804956808106096926, guid: 632e775b83de0164ba2038e28b3d8ae9, type: 3}
-  - {fileID: 2804956808106096926, guid: a7539790f1dcf5344a3529abdb9e3d8b, type: 3}
-  - {fileID: 2804956808106096926, guid: 8cebd9e6fd3b4894696b200446ebc108, type: 3}
-  - {fileID: 2804956808106096926, guid: fa205e331802ec64ebd2afbb2c43816f, type: 3}
-  - {fileID: 2804956808106096926, guid: 5af6411a168efd14e8846991b3e8d0b4, type: 3}
-  - {fileID: 2804956808106096926, guid: 50bc053749002d9498447fe02ff4ffb6, type: 3}
-  - {fileID: 2804956808106096926, guid: 0432025fb43cd49428e415b9a6ea5ada, type: 3}
-  - {fileID: 2804956808106096926, guid: 930c0be1b17398a4bbb23940fefccfa5, type: 3}
-  - {fileID: 2804956808106096926, guid: 88e012aad37909b4bbd96cf48770d87b, type: 3}
+  - {fileID: 4801383790354780530, guid: 632e775b83de0164ba2038e28b3d8ae9, type: 3}
+  - {fileID: 4801383790354780530, guid: 4e439dd9a67ee3a40ab217806204b2d8, type: 3}
 --- !u!4 &182766729
 Transform:
   m_ObjectHideFlags: 0
