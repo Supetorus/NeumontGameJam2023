@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flees: 1
-  aggroAlertRadius: 0
+  aggroAlertRadius: 5
   minAttackDistance: 1
   firstAttackDelay: 0.1
   directionChangeRange: 15
