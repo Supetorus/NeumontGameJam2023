@@ -169,8 +169,8 @@ MonoBehaviour:
     Knockback: 2
     AttackSpeed: 0.5
     AttackRange: 1
-    WeaponSprite: {fileID: 21300000, guid: 7c77999ca74f87249b2ed18881a24953, type: 3}
-    SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
+    WeaponSprite: {fileID: 0}
+    SweepSprite: {fileID: 0}
   m_WalkSpeed: 2
   m_RunSpeed: 4
   m_MaxHealth: 100

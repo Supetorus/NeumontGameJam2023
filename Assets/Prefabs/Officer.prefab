@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b597fdb1632b5ff4cad04edd84362ea1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 70744ec6370c4e740aa1fb616e47f598, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -199,6 +199,7 @@ MonoBehaviour:
   flees: 0
   aggroAlertRadius: 0
   minAttackDistance: 1
+  firstAttackDelay: 0.1
   directionChangeRange: 15
   doWander: 1
 --- !u!1 &3627973427447140753
