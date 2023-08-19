@@ -132,8 +132,11 @@ public class Character : MonoBehaviour
 
 		m_Rigidbody.AddForce(knockback * m_KnockbackScale, ForceMode2D.Impulse);
 
-		GameObject bloodPartical = Instantiate(m_BloodPartical, transform);
-		Destroy(bloodPartical, 5);
+		if (m_BloodPartical)
+		{
+			GameObject bloodPartical = Instantiate(m_BloodPartical, transform);
+			Destroy(bloodPartical, 5);
+		}
 
 		m_DamageEvent.Invoke();
 
