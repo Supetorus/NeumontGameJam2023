@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject playerPrefab;
 	public GameObject Player { get; private set; }
 
-	private int score = 0;
+	public int score { get; private set; } = 0;
 
 	private int scoreGoal = 5;
 
