@@ -252,10 +252,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Weapon:
-    SweepingAngle: 30
+    SweepingAngle: 180
     Damage: 10
     Knockback: 10
-    AttackSpeed: 0.3
+    AttackSpeed: 0
     AttackRange: 1
     WeaponSprite: {fileID: 21300000, guid: 48021c375cfac4241a8600f235f39715, type: 3}
     SweepSprite: {fileID: 21300000, guid: 52797bbbf3b944445b63b99ab7c311ab, type: 3}
@@ -264,12 +264,14 @@ MonoBehaviour:
   m_MaxHealth: 100
   m_BloodPartical: {fileID: 6361710182740195663, guid: c379e8677ef81b347892790d4f96dd4b, type: 3}
   m_KnockbackScale: 1
+  healthSlider: {fileID: 0}
   m_DeathEvent:
     m_PersistentCalls:
       m_Calls: []
   m_DamageEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_IsWeaponEnabled: 1
 --- !u!114 &4632187356136694626
 MonoBehaviour:
   m_ObjectHideFlags: 0

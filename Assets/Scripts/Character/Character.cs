@@ -40,7 +40,7 @@ public class Character : MonoBehaviour
 	[SerializeField]
 	private float m_KnockbackScale = 1;
 	[SerializeField, Tooltip("The slider representing the health of this character")]
-	private Fillbar healthBar;
+	private Fillbar m_HealthBar;
 
 	private float m_Health;
 	private Vector2 m_LookDirection = new Vector2(0, 0);
@@ -97,7 +97,7 @@ public class Character : MonoBehaviour
 	private void Update()
 	{
 		float speed = m_IsRunning ? m_RunSpeed : m_WalkSpeed;
-		if (healthBar != null) healthBar.SetPercentage(m_Health / m_MaxHealth);
+		if (m_HealthBar != null) m_HealthBar.SetPercentage(m_Health / m_MaxHealth);
 
 		float weaponAngle = Vector2.SignedAngle(Vector2.right, m_LookDirection);
 		m_SweepObject.transform.localPosition = m_LookDirection * 0.5f;
@@ -143,6 +143,11 @@ public class Character : MonoBehaviour
 		m_WeaponObject.SetActive(val);
 	}
 
+	public void Heal()
+	{
+		m_Health = m_MaxHealth;
+	}
+
 	public bool HasComponent(System.Type[] types)
 	{
 		foreach(System.Type t in types)
@@ -171,7 +176,7 @@ public class Character : MonoBehaviour
 		if(m_Health == 0)
 		{
 			m_DeathEvent.Invoke();
-			if (healthBar != null) healthBar.gameObject.SetActive(false);
+			if (m_HealthBar != null) m_HealthBar.gameObject.SetActive(false);
 		}
 	}
 
