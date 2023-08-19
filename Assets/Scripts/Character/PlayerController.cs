@@ -21,11 +21,12 @@ public class PlayerController : MonoBehaviour
 			Input.GetAxisRaw("Horizontal"),
 			Input.GetAxisRaw("Vertical")
 		);
+		Vector2 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
 		bool sprint = Input.GetKey(KeyCode.LeftShift) | Input.GetKey(KeyCode.RightShift);
 
 		m_Character.Move(movDir);
-		m_Character.SetSprite(sprint);
-		m_Character.SetLookDirection(new Vector2(0,0));
+		m_Character.SetSprint(sprint);
+		m_Character.SetLookDirection(lookDir);
 	}
 }

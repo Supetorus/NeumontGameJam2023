@@ -40,6 +40,8 @@ public class Character : MonoBehaviour
 
 	[HideInInspector]
 	public UnityEvent m_DeathEvent = new UnityEvent();
+	[HideInInspector]
+	public UnityEvent m_DamageEvent = new UnityEvent();
 
 	// Start is called before the first frame update
 	private void Start()
@@ -49,6 +51,7 @@ public class Character : MonoBehaviour
 		m_WeaponObject = new GameObject();
 		m_WeaponObject.transform.parent = transform;
 		m_WeaponSprite = m_WeaponObject.AddComponent<SpriteRenderer>();
+		m_WeaponSprite.sprite = m_Sprite;
 
 		// renderer
 		m_Renderer = GetComponent<SpriteRenderer>();
@@ -69,7 +72,8 @@ public class Character : MonoBehaviour
 	{
 		float speed = m_IsRunning ? m_RunSpeed : m_WalkSpeed;
 
-		m_WeaponObject.transform.position = m_LookDirection * 0.5f;
+		m_WeaponObject.transform.localPosition = m_LookDirection * 0.5f;
+		//m_WeaponObject.transform.rotation = Quaternion
 
 		if (m_MovementDirection.sqrMagnitude >= 0.001f)
 		{
@@ -82,7 +86,7 @@ public class Character : MonoBehaviour
 
 	}
 
-	public void SetSprite(bool sprint)
+	public void SetSprint(bool sprint)
 	{
 		m_IsRunning = sprint;
 	}
@@ -104,6 +108,8 @@ public class Character : MonoBehaviour
 
 		GameObject bloodPartical = Instantiate(m_BloodPartical);
 		Destroy(bloodPartical, 5);
+
+		m_DamageEvent.Invoke();
 
 		if(m_Health == 0)
 			m_DeathEvent.Invoke();
