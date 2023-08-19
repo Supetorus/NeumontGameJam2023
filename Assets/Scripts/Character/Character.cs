@@ -175,15 +175,17 @@ public class Character : MonoBehaviour
 				Character charComp = collision.GetComponent<Character>();
 				if (charComp != null && charComp != this)
 				{
-					Vector2 dir = (collision.transform.position - transform.position).normalized;
-
 					if (m_ComponentFilter != null && !charComp.HasComponent(m_ComponentFilter))
 						continue;
 
+					Vector2 circle = collision.transform.position - transform.position;
+					Vector2 pintOnLine = Vector2.Dot(circle, m_LookDirection) * m_LookDirection;
+					Vector2 circleToLine = pintOnLine - circle;
+					Vector2 closestPointOnCircle = circleToLine.normalized * Mathf.Clamp(circleToLine.magnitude, 0, 0.5f) + circle;
 
-					float angle = Vector2.Angle(m_LookDirection, dir);
+					float angle = Vector2.Angle(m_LookDirection, closestPointOnCircle);
 					if(angle <= m_Weapon.SweepingAngle/2)
-						charComp.Damage(m_Weapon.Damage, m_Weapon.Knockback * dir);
+						charComp.Damage(m_Weapon.Damage, m_Weapon.Knockback * circle);
 				}
 			}
 		}
