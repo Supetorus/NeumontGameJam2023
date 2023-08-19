@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,6 +46,9 @@ public class Character : MonoBehaviour
 	public UnityEvent m_DeathEvent = new UnityEvent();
 	[HideInInspector]
 	public UnityEvent m_DamageEvent = new UnityEvent();
+
+	[HideInInspector]
+	public Type[] m_ComponentFilter;
 
 	private float m_NextAttackTime;
 
@@ -125,6 +129,16 @@ public class Character : MonoBehaviour
 		m_LookDirection = direction.normalized;
 	}
 
+	public bool HasComponent(Type[] types)
+	{
+		foreach(Type t in types)
+		{
+			if(GetComponent(t) != null)
+				return true;
+		}
+		return false;
+	}
+
 	public void Damage(float damage, Vector2 knockback)
 	{
 		m_Health -= damage;
@@ -132,8 +146,11 @@ public class Character : MonoBehaviour
 
 		m_Rigidbody.AddForce(knockback * m_KnockbackScale, ForceMode2D.Impulse);
 
-		GameObject bloodPartical = Instantiate(m_BloodPartical, transform);
-		Destroy(bloodPartical, 5);
+		if (m_BloodPartical)
+		{
+			GameObject bloodPartical = Instantiate(m_BloodPartical, transform);
+			Destroy(bloodPartical, 5);
+		}
 
 		m_DamageEvent.Invoke();
 
@@ -159,6 +176,10 @@ public class Character : MonoBehaviour
 				if (charComp != null && charComp != this)
 				{
 					Vector2 dir = (collision.transform.position - transform.position).normalized;
+
+					if (m_ComponentFilter != null && !charComp.HasComponent(m_ComponentFilter))
+						continue;
+
 
 					float angle = Vector2.Angle(m_LookDirection, dir);
 					if(angle <= m_Weapon.SweepingAngle/2)

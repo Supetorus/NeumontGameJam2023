@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 	void Start()
 	{
 		m_Character = GetComponent<Character>();
+
+		m_Character.m_ComponentFilter = new Type[] { typeof(AIController) };
 	}
 
 	// Update is called once per frame
