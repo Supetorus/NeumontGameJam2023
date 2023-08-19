@@ -23,8 +23,12 @@ public class AIController : MonoBehaviour
 	private float currentAngle;
 	private bool isDead;
 
+	private static EnemyManager enemyManager;
+
 	private void Start()
 	{
+		if(enemyManager == null) { enemyManager =  FindFirstObjectByType<EnemyManager>(); }
+
 		currentAngle = Random.Range(0, 180);
 		character = GetComponent<Character>();
 		character.m_DamageEvent.AddListener(DamageTaken);
@@ -77,6 +81,7 @@ public class AIController : MonoBehaviour
 
 	private void OnDeath()
 	{
+		enemyManager.EnemyDeath(gameObject);
 		isDead = true;
 		GetComponent<Collider2D>().enabled = false;
 		character.Move(Vector2.zero);

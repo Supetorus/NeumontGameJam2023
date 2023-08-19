@@ -5,12 +5,13 @@ using static UnityEditor.PlayerSettings;
 public class WorldManager : MonoBehaviour
 {
 	private static readonly float TILE_SIZE = 20.0f;
+	private static readonly float HALF_TILE_SIZE = TILE_SIZE / 2.0f;
 
 	private static readonly int TILES_X = 4;
-	private static readonly float TILES_X_OFFSET = 5.0f - (TILES_X * TILE_SIZE / 2.0f);
+	private static readonly float TILES_X_OFFSET = HALF_TILE_SIZE - (TILES_X * HALF_TILE_SIZE);
 	private static readonly int TILES_X_EVEN = (TILES_X + 1) % 2 * 5;
 	private static readonly int TILES_Y = 3;
-	private static readonly float TILES_Y_OFFSET = 5.0f - (TILES_Y * TILE_SIZE / 2.0f);
+	private static readonly float TILES_Y_OFFSET = HALF_TILE_SIZE - (TILES_Y * HALF_TILE_SIZE);
 	private static readonly int TILES_Y_EVEN = (TILES_Y + 1) % 2 * 5;
 	private static uint SEED;
 
@@ -43,15 +44,14 @@ public class WorldManager : MonoBehaviour
 				tiles[i, j] = Instantiate(tilePrefabs[GetTile(newPos)], newPos, Quaternion.identity);
 			}
 		}
-
-		//TODO: Generate world
 	}
 
 	void Update()
 	{
 		Vector3 pos = manager.Player.transform.position;
 		prevPlayerTile = playerTile;
-		playerTile = new Vector2Int((int)((pos.x + 5.0f) / TILE_SIZE) - (pos.x < -5.0f ? 1 : 0), (int)((pos.y + 5.0f) / TILE_SIZE) - (pos.y < -5.0f ? 1 : 0));
+		playerTile = new Vector2Int((int)((pos.x + HALF_TILE_SIZE) / TILE_SIZE - (pos.x < -HALF_TILE_SIZE ? 1 : 0)), 
+			(int)((pos.y + HALF_TILE_SIZE) / TILE_SIZE - (pos.y < -HALF_TILE_SIZE ? 1 : 0)));
 
 		if (prevPlayerTile.x < playerTile.x)
 		{
