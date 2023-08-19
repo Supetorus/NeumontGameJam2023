@@ -4,11 +4,13 @@ using static UnityEditor.PlayerSettings;
 
 public class WorldManager : MonoBehaviour
 {
+	private static readonly float TILE_SIZE = 20.0f;
+
 	private static readonly int TILES_X = 4;
-	private static readonly float TILES_X_OFFSET = 5.0f - (TILES_X * 10.0f / 2.0f);
+	private static readonly float TILES_X_OFFSET = 5.0f - (TILES_X * TILE_SIZE / 2.0f);
 	private static readonly int TILES_X_EVEN = (TILES_X + 1) % 2 * 5;
 	private static readonly int TILES_Y = 3;
-	private static readonly float TILES_Y_OFFSET = 5.0f - (TILES_Y * 10.0f / 2.0f);
+	private static readonly float TILES_Y_OFFSET = 5.0f - (TILES_Y * TILE_SIZE / 2.0f);
 	private static readonly int TILES_Y_EVEN = (TILES_Y + 1) % 2 * 5;
 	private static uint SEED;
 
@@ -22,8 +24,8 @@ public class WorldManager : MonoBehaviour
 
 	private int GetTile(Vector3 pos)
 	{
-		uint x = (uint)(((int)pos.x + TILES_X_EVEN) / 10);
-		uint y = (uint)(((int)pos.y + TILES_Y_EVEN) / 10);
+		uint x = (uint)(((int)pos.x + TILES_X_EVEN) / TILE_SIZE);
+		uint y = (uint)(((int)pos.y + TILES_Y_EVEN) / TILE_SIZE);
 		return (int)((x ^ 2U * y + SEED) % (uint)tilePrefabs.Count);
 	}
 
@@ -36,7 +38,7 @@ public class WorldManager : MonoBehaviour
 		{
 			for (int j = 0; j < TILES_Y; ++j)
 			{
-				Vector3 newPos = new Vector3(i * 10.0f + TILES_X_OFFSET, j * 10.0f + TILES_Y_OFFSET, 0.0f);
+				Vector3 newPos = new Vector3(i * TILE_SIZE + TILES_X_OFFSET, j * TILE_SIZE + TILES_Y_OFFSET, 0.0f);
 
 				tiles[i, j] = Instantiate(tilePrefabs[GetTile(newPos)], newPos, Quaternion.identity);
 			}
@@ -49,7 +51,7 @@ public class WorldManager : MonoBehaviour
 	{
 		Vector3 pos = manager.Player.transform.position;
 		prevPlayerTile = playerTile;
-		playerTile = new Vector2Int((int)((pos.x + 5.0f) / 10) - (pos.x < -5.0f ? 1 : 0), (int)((pos.y + 5.0f) / 10) - (pos.y < -5.0f ? 1 : 0));
+		playerTile = new Vector2Int((int)((pos.x + 5.0f) / TILE_SIZE) - (pos.x < -5.0f ? 1 : 0), (int)((pos.y + 5.0f) / TILE_SIZE) - (pos.y < -5.0f ? 1 : 0));
 
 		if (prevPlayerTile.x < playerTile.x)
 		{
@@ -58,8 +60,8 @@ public class WorldManager : MonoBehaviour
 				Destroy(tiles[0, j]);
 				for (int i = 0; i < TILES_X - 1; ++i) { tiles[i, j] = tiles[i + 1, j]; }
 
-				Vector3 newPos = new Vector3((playerTile.x + TILES_X - 1) * 10.0f + TILES_X_OFFSET,
-					(playerTile.y + j) * 10.0f + TILES_Y_OFFSET, 0.0f);
+				Vector3 newPos = new Vector3((playerTile.x + TILES_X - 1) * TILE_SIZE + TILES_X_OFFSET,
+					(playerTile.y + j) * TILE_SIZE + TILES_Y_OFFSET, 0.0f);
 
 				tiles[TILES_X - 1, j] = Instantiate(tilePrefabs[GetTile(newPos)], newPos, Quaternion.identity);
 			}
@@ -71,8 +73,8 @@ public class WorldManager : MonoBehaviour
 				Destroy(tiles[TILES_X - 1, j]);
 				for (int i = TILES_X - 1; i > 0; --i) { tiles[i, j] = tiles[i - 1, j]; }
 
-				Vector3 newPos = new Vector3((playerTile.x - TILES_X + 1) * 10.0f - TILES_X_OFFSET,
-					(playerTile.y + j) * 10.0f + TILES_Y_OFFSET, 0.0f);
+				Vector3 newPos = new Vector3((playerTile.x - TILES_X + 1) * TILE_SIZE - TILES_X_OFFSET,
+					(playerTile.y + j) * TILE_SIZE + TILES_Y_OFFSET, 0.0f);
 
 				tiles[0, j] = Instantiate(tilePrefabs[GetTile(newPos)], newPos, Quaternion.identity);
 			}
@@ -85,8 +87,8 @@ public class WorldManager : MonoBehaviour
 				Destroy(tiles[i, 0]);
 				for (int j = 0; j < TILES_Y - 1; ++j) { tiles[i, j] = tiles[i, j + 1]; }
 
-				Vector3 newPos = new Vector3((playerTile.x + i) * 10.0f + TILES_X_OFFSET,
-					(playerTile.y + TILES_Y - 1) * 10.0f + TILES_Y_OFFSET, 0.0f);
+				Vector3 newPos = new Vector3((playerTile.x + i) * TILE_SIZE + TILES_X_OFFSET,
+					(playerTile.y + TILES_Y - 1) * TILE_SIZE + TILES_Y_OFFSET, 0.0f);
 
 				tiles[i, TILES_Y - 1] = Instantiate(tilePrefabs[GetTile(newPos)], newPos, Quaternion.identity);
 			}
@@ -98,8 +100,8 @@ public class WorldManager : MonoBehaviour
 				Destroy(tiles[i, TILES_Y - 1]);
 				for (int j = TILES_Y - 1; j > 0; --j) { tiles[i, j] = tiles[i, j - 1]; }
 
-				Vector3 newPos = new Vector3((playerTile.x + i) * 10.0f + TILES_X_OFFSET,
-					(playerTile.y - TILES_Y + 1) * 10.0f - TILES_Y_OFFSET, 0.0f);
+				Vector3 newPos = new Vector3((playerTile.x + i) * TILE_SIZE + TILES_X_OFFSET,
+					(playerTile.y - TILES_Y + 1) * TILE_SIZE - TILES_Y_OFFSET, 0.0f);
 
 				tiles[i, 0] = Instantiate(tilePrefabs[GetTile(newPos)], newPos, Quaternion.identity);
 			}
