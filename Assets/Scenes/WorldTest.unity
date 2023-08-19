@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 2825297120206938323, guid: 797795072357b28409d957cc3a3ec2a5, type: 3}
+  - {fileID: 116153852744238503, guid: 947c0de2d09b06b45ac84072f289ae03, type: 3}
 --- !u!4 &2036305442
 Transform:
   m_ObjectHideFlags: 0
