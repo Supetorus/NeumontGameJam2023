@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
 	private GameObject m_SweepObject;
 	private SpriteRenderer m_SweepSprite;
 
+	[SerializeField]
 	private Weapon m_Weapon;
 
 	[Header("Movement")]
