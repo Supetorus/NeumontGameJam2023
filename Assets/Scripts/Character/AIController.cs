@@ -27,7 +27,7 @@ public class AIController : MonoBehaviour
 
 	private void Start()
 	{
-		if(enemyManager == null) { FindFirstObjectByType<EnemyManager>(); }
+		if(enemyManager == null) { enemyManager =  FindFirstObjectByType<EnemyManager>(); }
 
 		currentAngle = Random.Range(0, 180);
 		character = GetComponent<Character>();
