@@ -78,6 +78,7 @@ public class Character : MonoBehaviour
 		m_Rigidbody.bodyType = RigidbodyType2D.Dynamic;
 		m_Rigidbody.interpolation = RigidbodyInterpolation2D.None;
 		m_Rigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+		m_Rigidbody.freezeRotation = true;
 		m_Rigidbody.gravityScale = 0;
 	}
 
