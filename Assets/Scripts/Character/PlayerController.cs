@@ -26,6 +26,6 @@ public class PlayerController : MonoBehaviour
 
 		m_Character.Move(movDir);
 		m_Character.SetSprite(sprint);
-		m_Character.SetLookDirection();
+		m_Character.SetLookDirection(new Vector2(0,0));
 	}
 }
