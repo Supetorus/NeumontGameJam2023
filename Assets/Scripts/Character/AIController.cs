@@ -59,6 +59,7 @@ public class AIController : MonoBehaviour
 
 		if (distToPlayer >= 1.0001)
 			character.Move(moveDirection);
+		character.SetLookDirection(moveDirection);
 	}
 
 	private void DamageTaken()
