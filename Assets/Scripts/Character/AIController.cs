@@ -35,11 +35,13 @@ public class AIController : MonoBehaviour
 	private void Update()
 	{
 		Vector2 moveDirection;
+		float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
 		if (isAggro)
 		{
 			Vector2 toPlayer = player.transform.position - transform.position;
 			moveDirection = flees ? -toPlayer : toPlayer;
-			if (!flees && Vector3.Distance(transform.position, player.transform.position) < minAttackDistance) character.Attack();
+
+			if (!flees && distToPlayer < minAttackDistance) character.Attack();
 		}
 		else if (doWander)
 		{
@@ -51,7 +53,9 @@ public class AIController : MonoBehaviour
 			moveDirection = Vector2.zero;
 		}
 		character.SetSprint(isAggro);
-		character.Move(moveDirection);
+
+		if (distToPlayer >= 1.0001)
+			character.Move(moveDirection);
 	}
 
 	private void DamageTaken()
