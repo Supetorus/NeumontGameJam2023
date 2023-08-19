@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4490112737871815262}
   - component: {fileID: 3673960852675402795}
+  - component: {fileID: 3431114098982445264}
+  - component: {fileID: 1658259077995016330}
+  - component: {fileID: 4037765931794684169}
+  - component: {fileID: 6866827355515442586}
   m_Layer: 0
   m_Name: testEnemy
   m_TagString: Untagged
@@ -84,3 +88,113 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &3431114098982445264
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116153852744238503}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!50 &1658259077995016330
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116153852744238503}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4037765931794684169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116153852744238503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529df90da2bea7f4f89a41a5cc0e8628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weapon:
+    SweepingAngle: 0
+    Damage: 0
+    Knockback: 0
+    AttackSpeed: 0
+    AttackRange: 0
+    WeaponSprite: {fileID: 0}
+    SweepSprite: {fileID: 0}
+  m_WalkSpeed: 2
+  m_RunSpeed: 4
+  m_MaxHealth: 100
+  m_BloodPartical: {fileID: 0}
+  m_KnockbackScale: 1
+  m_DeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6866827355515442586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116153852744238503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6854ee48671b35f4e818d3cb77e3c4b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flees: 0
+  aggroAlertRadius: 0
+  minAttackDistance: 1
+  directionChangeRange: 15
+  doWander: 1
