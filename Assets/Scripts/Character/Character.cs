@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +47,7 @@ public class Character : MonoBehaviour
 	public UnityEvent m_DamageEvent = new UnityEvent();
 
 	[HideInInspector]
-	public Type[] m_ComponentFilter;
+	public System.Type[] m_ComponentFilter;
 
 	private float m_NextAttackTime;
 
@@ -129,9 +128,9 @@ public class Character : MonoBehaviour
 		m_LookDirection = direction.normalized;
 	}
 
-	public bool HasComponent(Type[] types)
+	public bool HasComponent(System.Type[] types)
 	{
-		foreach(Type t in types)
+		foreach(System.Type t in types)
 		{
 			if(GetComponent(t) != null)
 				return true;
@@ -175,15 +174,17 @@ public class Character : MonoBehaviour
 				Character charComp = collision.GetComponent<Character>();
 				if (charComp != null && charComp != this)
 				{
-					Vector2 dir = (collision.transform.position - transform.position).normalized;
-
 					if (m_ComponentFilter != null && !charComp.HasComponent(m_ComponentFilter))
 						continue;
 
+					Vector2 circle = collision.transform.position - transform.position;
+					Vector2 pintOnLine = Vector2.Dot(circle, m_LookDirection) * m_LookDirection;
+					Vector2 circleToLine = pintOnLine - circle;
+					Vector2 closestPointOnCircle = circleToLine.normalized * Mathf.Clamp(circleToLine.magnitude, 0, 0.5f) + circle;
 
-					float angle = Vector2.Angle(m_LookDirection, dir);
+					float angle = Vector2.Angle(m_LookDirection, closestPointOnCircle);
 					if(angle <= m_Weapon.SweepingAngle/2)
-						charComp.Damage(m_Weapon.Damage, m_Weapon.Knockback * dir);
+						charComp.Damage(m_Weapon.Damage, m_Weapon.Knockback * circle);
 				}
 			}
 		}
