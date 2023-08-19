@@ -158,7 +158,10 @@ public class Character : MonoBehaviour
 		m_DamageEvent.Invoke();
 
 		if(m_Health == 0)
+		{
 			m_DeathEvent.Invoke();
+			healthSlider.gameObject.SetActive(false);
+		}
 	}
 
 	public void Attack()

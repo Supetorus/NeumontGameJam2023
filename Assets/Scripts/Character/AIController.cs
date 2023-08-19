@@ -21,12 +21,14 @@ public class AIController : MonoBehaviour
 	private Character character;
 	private GameObject player;
 	private float currentAngle;
+	private bool isDead;
 
 	private void Start()
 	{
 		currentAngle = Random.Range(0, 180);
 		character = GetComponent<Character>();
 		character.m_DamageEvent.AddListener(DamageTaken);
+		character.m_DeathEvent.AddListener(OnDeath);
 		player = FindObjectOfType<GameManager>().Player;
 
 		character.m_ComponentFilter = new System.Type[] { typeof(PlayerController) };
@@ -34,6 +36,7 @@ public class AIController : MonoBehaviour
 
 	private void Update()
 	{
+		if (isDead) return;
 		Vector2 moveDirection;
 		float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
 		if (isAggro)
@@ -69,5 +72,33 @@ public class AIController : MonoBehaviour
 				aiController.isAggro = true;
 			}
 		}
+	}
+
+	private void OnDeath()
+	{
+		isDead = true;
+		GetComponent<Collider2D>().enabled = false;
+		character.Move(Vector2.zero);
+		GetComponent<SpriteRenderer>().color = Color.red;
+		StartCoroutine(DeathAnimation());
+	}
+
+	private const float timeToDie = 0.5f;
+	private IEnumerator DeathAnimation()
+	{
+		bool flip = System.Convert.ToBoolean(Random.Range(0, 1));
+		Quaternion startRotation = transform.rotation;
+		Quaternion targetRotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + (flip ? -90 : 90));
+
+		float elapsedTime = 0.0f;
+
+		while (elapsedTime < timeToDie)
+		{
+			transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / timeToDie);
+			elapsedTime += Time.deltaTime;
+			yield return null;
+		}
+
+		transform.rotation = targetRotation;
 	}
 }
