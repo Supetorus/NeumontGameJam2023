@@ -33,5 +33,7 @@ public class PlayerController : MonoBehaviour
 
 		if(Input.GetMouseButtonDown(0))
 			m_Character.Attack();
+
+		GameManager.Instance.SetHealth(m_Character.GetHealthPercent());
 	}
 }
