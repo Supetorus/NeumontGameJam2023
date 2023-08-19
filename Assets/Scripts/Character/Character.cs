@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
 	private GameObject m_SweepObject;
 	private SpriteRenderer m_SweepSprite;
 
-	public Weapon m_Weapon;
+	private Weapon m_Weapon;
 
 	[Header("Movement")]
 	[SerializeField]
@@ -141,6 +141,14 @@ public class Character : MonoBehaviour
 		m_IsWeaponEnabled = val;
 
 		m_WeaponObject.SetActive(val);
+	}
+
+	public void SetWeapon(Weapon weapon)
+	{
+		m_Weapon = weapon;
+
+		m_WeaponSprite.sprite = weapon.WeaponSprite;
+		m_SweepSprite.sprite = weapon.SweepSprite;
 	}
 
 	public void Heal()
