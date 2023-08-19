@@ -62,11 +62,13 @@ public class Character : MonoBehaviour
 		m_WeaponObject.transform.parent = transform;
 		m_WeaponSprite = m_WeaponObject.AddComponent<SpriteRenderer>();
 		m_WeaponSprite.sprite = m_Weapon.WeaponSprite;
+		m_WeaponSprite.sortingOrder = 1;
 
 		m_SweepObject = new GameObject();
 		m_SweepObject.transform.parent = transform;
 		m_SweepSprite = m_SweepObject.AddComponent<SpriteRenderer>();
 		m_SweepSprite.sprite = m_Weapon.SweepSprite;
+		m_SweepSprite.sortingOrder = 2;
 		m_SweepObject.SetActive(false);
 
 		// renderer
@@ -106,7 +108,7 @@ public class Character : MonoBehaviour
 		{
 			m_Renderer.flipX = Vector2.Dot(m_MovementDirection, Vector2.left) > 0;
 
-			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 2.0f * Time.deltaTime);
+			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 4.0f * Time.deltaTime);
 		}
 		else
 			m_Rigidbody.velocity = Vector2.zero;
