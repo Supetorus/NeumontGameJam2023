@@ -106,7 +106,7 @@ public class Character : MonoBehaviour
 		{
 			m_Renderer.flipX = Vector2.Dot(m_MovementDirection, Vector2.left) > 0;
 
-			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 0.2f);
+			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 2.0f * Time.deltaTime);
 		}
 		else
 			m_Rigidbody.velocity = Vector2.zero;
