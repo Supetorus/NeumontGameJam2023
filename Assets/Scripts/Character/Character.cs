@@ -56,6 +56,8 @@ public class Character : MonoBehaviour
 
 	private float m_DisableSweepSpritTime;
 
+	public bool m_IsWeaponEnabled = true;
+
 	// Start is called before the first frame update
 	private void Start()
 	{
@@ -134,6 +136,13 @@ public class Character : MonoBehaviour
 		m_LookDirection = direction.normalized;
 	}
 
+	public void SetWeaponEnabled(bool val)
+	{
+		m_IsWeaponEnabled = val;
+
+		m_WeaponObject.SetActive(val);
+	}
+
 	public bool HasComponent(System.Type[] types)
 	{
 		foreach(System.Type t in types)
@@ -168,6 +177,9 @@ public class Character : MonoBehaviour
 
 	public void Attack()
 	{
+		if (!m_IsWeaponEnabled)
+			return;
+
 		if (Time.time >= m_NextAttackTime)
 		{
 			m_NextAttackTime = Time.time + m_Weapon.AttackSpeed;
