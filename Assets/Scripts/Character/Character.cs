@@ -93,14 +93,14 @@ public class Character : MonoBehaviour
 
 		float weaponAngle = Vector2.SignedAngle(Vector2.right, m_LookDirection);
 		m_SweepObject.transform.localPosition = m_LookDirection * 0.5f;
-		m_SweepObject.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.forward);
+		m_SweepObject.transform.rotation = Quaternion.AngleAxis(weaponAngle - 90, Vector3.forward);
 
 		if (Time.time >= m_DisableSweepSpritTime)
 			m_SweepObject.SetActive(false);
 
 		weaponAngle += m_Weapon.SweepingAngle * 0.5f * (m_WeaponSprite.flipX ? -1 : 1);
 		m_WeaponObject.transform.localPosition = new Vector2(Mathf.Cos(weaponAngle * Mathf.Deg2Rad), Mathf.Sin(weaponAngle * Mathf.Deg2Rad)) * 0.5f;
-		m_WeaponObject.transform.rotation = Quaternion.AngleAxis(weaponAngle, Vector3.forward);
+		m_WeaponObject.transform.rotation = Quaternion.AngleAxis(weaponAngle - 90, Vector3.forward);
 
 		if (m_MovementDirection.sqrMagnitude >= 0.001f)
 		{
@@ -163,6 +163,7 @@ public class Character : MonoBehaviour
 		{
 			m_NextAttackTime = Time.time + m_Weapon.AttackSpeed;
 
+			m_SweepSprite.flipX = m_WeaponSprite.flipX;
 			m_WeaponSprite.flipX = !m_WeaponSprite.flipX;
 			m_SweepObject.SetActive(true);
 			m_DisableSweepSpritTime = Time.time + 0.1f;
