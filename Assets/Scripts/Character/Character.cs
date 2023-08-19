@@ -191,7 +191,7 @@ public class Character : MonoBehaviour
 
 	public void Attack()
 	{
-		if (!m_IsWeaponEnabled)
+		if (!m_IsWeaponEnabled || GameManager.Instance.Paused || GameManager.Instance.InShop)
 			return;
 
 		if (Time.time >= m_NextAttackTime)
