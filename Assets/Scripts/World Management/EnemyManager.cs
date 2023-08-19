@@ -73,4 +73,9 @@ public class EnemyManager : MonoBehaviour
 		enemies.Remove(enemy);
 		GameManager.Instance.AddScore();
 	}
+
+	public void Despawn(GameObject enemy)
+	{
+		enemies.Remove(enemy);
+	}
 }

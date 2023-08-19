@@ -25,6 +25,7 @@ public class AIController : MonoBehaviour
 	private float currentAngle;
 	private bool isDead;
 	private float firstAttackTimer = 0;
+	private float fleeTimer = 0;
 	private static EnemyManager enemyManager;
 	private const int maxDeadBodies = 100;
 	private static Queue<AIController> deadPeople = new Queue<AIController>();
@@ -64,6 +65,21 @@ public class AIController : MonoBehaviour
 			else
 			{
 				firstAttackTimer = 0;
+			}
+
+			if(flees)
+			{
+				fleeTimer += Time.deltaTime;
+
+				if(GetComponent<Renderer>().isVisible)
+				{
+					fleeTimer = 0.0f;
+				}
+				else if(fleeTimer >= 10.0f)
+				{
+					enemyManager.Despawn(gameObject);
+					Destroy(gameObject);
+				}
 			}
 		}
 		else if (doWander)
