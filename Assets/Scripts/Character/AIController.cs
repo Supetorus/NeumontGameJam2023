@@ -25,8 +25,9 @@ public class AIController : MonoBehaviour
 	private float currentAngle;
 	private bool isDead;
 	private float firstAttackTimer = 0;
-
 	private static EnemyManager enemyManager;
+	private const int maxDeadBodies = 100;
+	private static Queue<AIController> deadPeople = new Queue<AIController>();
 
 	private void Start()
 	{
@@ -102,6 +103,11 @@ public class AIController : MonoBehaviour
 		character.Move(Vector2.zero);
 		GetComponent<SpriteRenderer>().color = Color.red;
 		StartCoroutine(DeathAnimation());
+		deadPeople.Enqueue(this);
+		while (deadPeople.Count > maxDeadBodies)
+		{
+			Destroy(deadPeople.Dequeue().gameObject);
+		}
 	}
 
 	private const float timeToDie = 0.5f;
