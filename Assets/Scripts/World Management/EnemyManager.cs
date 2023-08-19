@@ -67,4 +67,10 @@ public class EnemyManager : MonoBehaviour
 			}
 		}
 	}
+
+	public void EnemyDeath(GameObject enemy)
+	{
+		enemies.Remove(enemy);
+		GameManager.Instance.AddScore();
+	}
 }
