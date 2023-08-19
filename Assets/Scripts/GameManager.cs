@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
 	private int score = 0;
 
+	private int scoreGoal = 5;
+
 	private void Awake()
 	{
 		if(Instance == null) { Instance = this; DontDestroyOnLoad(this); }
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
+		//TODO: Remove, for debug use
 		if(Input.GetKeyDown(KeyCode.P))
 		{
 			OpenShop();
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour
 	{
 		hud.SetScore(++score);
 
-		if(score == 10) { OpenShop(); }
+		if(score == scoreGoal) { OpenShop(); scoreGoal *= 2; }
 	}
 
 	public void OpenShop()

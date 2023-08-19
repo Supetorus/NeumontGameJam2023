@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MaxHealth: 100
   m_BloodPartical: {fileID: 6361710182740195663, guid: c379e8677ef81b347892790d4f96dd4b, type: 3}
   m_KnockbackScale: 1
-  healthBar: {fileID: 404881100946424186}
+  m_HealthBar: {fileID: 404881100946424186}
   m_DeathEvent:
     m_PersistentCalls:
       m_Calls: []
