@@ -28,6 +28,8 @@ public class AIController : MonoBehaviour
 		character = GetComponent<Character>();
 		character.m_DamageEvent.AddListener(DamageTaken);
 		player = FindObjectOfType<GameManager>().Player;
+
+		character.m_ComponentFilter = new System.Type[] { typeof(PlayerController) };
 	}
 
 	private void Update()

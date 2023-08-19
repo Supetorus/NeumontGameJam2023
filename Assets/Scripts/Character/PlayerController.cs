@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,7 +13,7 @@ public class PlayerController : MonoBehaviour
 	{
 		m_Character = GetComponent<Character>();
 
-		m_Character.m_ComponentFilter = new Type[] { typeof(AIController) };
+		m_Character.m_ComponentFilter = new System.Type[] { typeof(AIController) };
 	}
 
 	// Update is called once per frame

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +47,7 @@ public class Character : MonoBehaviour
 	public UnityEvent m_DamageEvent = new UnityEvent();
 
 	[HideInInspector]
-	public Type[] m_ComponentFilter;
+	public System.Type[] m_ComponentFilter;
 
 	private float m_NextAttackTime;
 
@@ -129,9 +128,9 @@ public class Character : MonoBehaviour
 		m_LookDirection = direction.normalized;
 	}
 
-	public bool HasComponent(Type[] types)
+	public bool HasComponent(System.Type[] types)
 	{
-		foreach(Type t in types)
+		foreach(System.Type t in types)
 		{
 			if(GetComponent(t) != null)
 				return true;
