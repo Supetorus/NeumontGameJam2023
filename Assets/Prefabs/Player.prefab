@@ -166,7 +166,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 810346f8d0facda4da3d29d715ccbc9a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03315ff2a7a9c0b439a1ca9e9db20046, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_MaxHealth: 100
   m_BloodPartical: {fileID: 6361710182740195663, guid: c379e8677ef81b347892790d4f96dd4b, type: 3}
   m_KnockbackScale: 1
-  healthSlider: {fileID: 0}
+  m_HealthBar: {fileID: 0}
   m_DeathEvent:
     m_PersistentCalls:
       m_Calls: []
