@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -37,6 +38,8 @@ public class Character : MonoBehaviour
 	private GameObject m_BloodPartical;
 	[SerializeField]
 	private float m_KnockbackScale = 1;
+	[SerializeField, Tooltip("The slider representing the health of this character")]
+	private Slider healthSlider;
 
 	private float m_Health;
 	private Vector2 m_LookDirection = new Vector2(0, 0);
@@ -62,11 +65,13 @@ public class Character : MonoBehaviour
 		m_WeaponObject.transform.parent = transform;
 		m_WeaponSprite = m_WeaponObject.AddComponent<SpriteRenderer>();
 		m_WeaponSprite.sprite = m_Weapon.WeaponSprite;
+		m_WeaponSprite.sortingOrder = 1;
 
 		m_SweepObject = new GameObject();
 		m_SweepObject.transform.parent = transform;
 		m_SweepSprite = m_SweepObject.AddComponent<SpriteRenderer>();
 		m_SweepSprite.sprite = m_Weapon.SweepSprite;
+		m_SweepSprite.sortingOrder = 2;
 		m_SweepObject.SetActive(false);
 
 		// renderer
@@ -89,6 +94,7 @@ public class Character : MonoBehaviour
 	private void Update()
 	{
 		float speed = m_IsRunning ? m_RunSpeed : m_WalkSpeed;
+		if (healthSlider != null) healthSlider.value = m_Health / m_MaxHealth;
 
 
 		float weaponAngle = Vector2.SignedAngle(Vector2.right, m_LookDirection);
@@ -106,7 +112,7 @@ public class Character : MonoBehaviour
 		{
 			m_Renderer.flipX = Vector2.Dot(m_MovementDirection, Vector2.left) > 0;
 
-			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 2.0f * Time.deltaTime);
+			m_Rigidbody.velocity = Vector2.Lerp(m_Rigidbody.velocity, m_MovementDirection * speed, 4.0f * Time.deltaTime);
 		}
 		else
 			m_Rigidbody.velocity = Vector2.zero;
@@ -154,7 +160,10 @@ public class Character : MonoBehaviour
 		m_DamageEvent.Invoke();
 
 		if(m_Health == 0)
+		{
 			m_DeathEvent.Invoke();
+			healthSlider.gameObject.SetActive(false);
+		}
 	}
 
 	public void Attack()
