@@ -876,6 +876,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 116153852744238503, guid: 947c0de2d09b06b45ac84072f289ae03, type: 3}
+  - {fileID: 116153852744238503, guid: dd22f015c6ae8e346854ba88720a50d2, type: 3}
+  - {fileID: 116153852744238503, guid: 3b7e295cf06c67a4ba090d2cd266acd8, type: 3}
 --- !u!4 &324598774
 Transform:
   m_ObjectHideFlags: 0
@@ -1954,8 +1956,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+      - m_Target: {fileID: 1963235513}
+        m_TargetAssemblyTypeName: Death, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -2163,8 +2165,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+      - m_Target: {fileID: 1963235513}
+        m_TargetAssemblyTypeName: Death, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:

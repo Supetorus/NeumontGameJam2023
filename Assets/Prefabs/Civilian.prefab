@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4037765931794684169}
   - component: {fileID: 6866827355515442586}
   m_Layer: 0
-  m_Name: testEnemy
+  m_Name: Civilian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_DamageEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_IsWeaponEnabled: 1
+  m_IsWeaponEnabled: 0
 --- !u!114 &6866827355515442586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,9 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6854ee48671b35f4e818d3cb77e3c4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flees: 0
+  flees: 1
   aggroAlertRadius: 0
   minAttackDistance: 1
+  firstAttackDelay: 0.1
   directionChangeRange: 15
   doWander: 1
 --- !u!1 &3627973427447140753
