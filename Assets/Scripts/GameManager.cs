@@ -12,8 +12,12 @@ public class GameManager : MonoBehaviour
 		private set { sceneLoader = value; }
 	}
 
+	private HUD hud;
+
 	[SerializeField] private GameObject playerPrefab;
 	public GameObject Player { get; private set; }
+
+	private int score = 0;
 
 	private void Awake()
 	{
@@ -26,5 +30,17 @@ public class GameManager : MonoBehaviour
 		{
 			Player = Instantiate(playerPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
 		}
+	}
+
+	public void SetHealth(float percent)
+	{
+		if(hud == null) { hud = FindFirstObjectByType<HUD>(); }
+		hud.SetHealth(percent);
+	}
+
+	public void AddScore()
+	{
+		if (hud == null) { hud = FindFirstObjectByType<HUD>(); }
+		hud.SetScore(++score);
 	}
 }
