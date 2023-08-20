@@ -874,9 +874,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 116153852744238503, guid: 947c0de2d09b06b45ac84072f289ae03, type: 3}
-  - {fileID: 116153852744238503, guid: dd22f015c6ae8e346854ba88720a50d2, type: 3}
-  - {fileID: 116153852744238503, guid: 3b7e295cf06c67a4ba090d2cd266acd8, type: 3}
+  - prefab: {fileID: 116153852744238503, guid: dd22f015c6ae8e346854ba88720a50d2, type: 3}
+    weight: 5
+    weightIncrease: 0
+  - prefab: {fileID: 116153852744238503, guid: 3b7e295cf06c67a4ba090d2cd266acd8, type: 3}
+    weight: 2
+    weightIncrease: 0.5
+  - prefab: {fileID: 116153852744238503, guid: 947c0de2d09b06b45ac84072f289ae03, type: 3}
+    weight: 1
+    weightIncrease: 1
 --- !u!4 &324598774
 Transform:
   m_ObjectHideFlags: 0

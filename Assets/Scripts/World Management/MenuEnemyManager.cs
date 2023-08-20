@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class MenuEnemyManager : MonoBehaviour
 {
 	private static readonly int MAX_ENEMIES = 20;
 	private static readonly float MAX_ENEMY_DISTANCE_X = 15.0f;
@@ -11,35 +11,29 @@ public class EnemyManager : MonoBehaviour
 	struct EnemySpawn
 	{
 		public GameObject prefab;
-		[Tooltip("The weight of spawn chance, influenced by every spawn weight"), Range(0.0f, 10.0f)]
+		[Range(0.0f, 10.0f)]
 		public float weight;
-		[Tooltip("Increases the spawn weight over every ten kills"), Range(0.0f, 10.0f)]
-		public float weightIncrease;
 	}
 
+	[SerializeField] private Transform target;
 	[SerializeField] private List<EnemySpawn> enemyPrefabs;
 
 	private List<GameObject> spawnedEnemies = new List<GameObject>();
-	private GameManager manager;
 	private float spawnWeight = 0.0f;
 
 	private void Start()
 	{
-		manager = FindFirstObjectByType<GameManager>();
+		foreach (EnemySpawn spawn in enemyPrefabs)
+		{
+			spawnWeight += spawn.weight;
+		}
 	}
 
 	private void Update()
 	{
 		int maxEnemies = MAX_ENEMIES + GameManager.Instance.Score / 10;
 
-		spawnWeight = 0.0f;
-
-		foreach (EnemySpawn spawn in enemyPrefabs)
-		{
-			spawnWeight += spawn.weight + GameManager.Instance.Score / 10.0f * spawn.weightIncrease;
-		}
-
-		Vector3 pos = manager.Player.transform.position;
+		Vector3 pos = target.position;
 
 		foreach (GameObject enemy in spawnedEnemies)
 		{
@@ -92,17 +86,15 @@ public class EnemyManager : MonoBehaviour
 		float weight = 0.0f;
 
 		int i = 0;
-		foreach(EnemySpawn enemy in enemyPrefabs)
+		foreach (EnemySpawn enemy in enemyPrefabs)
 		{
-			float enemyWeight = enemy.weight + GameManager.Instance.Score / 10.0f * enemy.weightIncrease;
-
-			if (spawn <= enemyWeight + weight)
+			if (spawn <= enemy.weight + weight)
 			{
 				return i;
 			}
 
 			++i;
-			weight += enemyWeight;
+			weight += enemy.weight;
 		}
 
 		return 0;
