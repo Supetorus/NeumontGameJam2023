@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
 	{
 		Paused = false;
 		InShop = false;
+		InGame = false;
 		Score = 0;
 		scoreGoal = 5;
 
