@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 	private Death death;
 	public bool Paused { get; private set; }
 	public bool InShop { get; private set; }
+	public bool InGame { get; private set; }
 
 	[SerializeField] private GameObject playerPrefab;
 	public GameObject Player { get; private set; }
@@ -47,21 +48,13 @@ public class GameManager : MonoBehaviour
 	{
 		if (destroy) { DestroyImmediate(gameObject); }
 		else { DontDestroyOnLoad(this); }
+
+		InGame = false;
 	}
 
 	private void Update()
 	{
-		//TODO: Remove, for debug use
-		if(Input.GetKeyDown(KeyCode.P))
-		{
-			OpenShop();
-		}
-		else if(Input.GetKeyDown(KeyCode.O))
-		{
-			CloseShop();
-		}
-
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape) && InGame)
 		{
 			if(Paused) { Unpause(); }
 			else { Pause(); }
@@ -82,6 +75,9 @@ public class GameManager : MonoBehaviour
 			Paused = false;
 			death = FindFirstObjectByType<Death>();
 			death.gameObject.SetActive(false);
+
+			Cursor.lockState = CursorLockMode.Confined;
+			InGame = true;
 		}
 	}
 
@@ -102,6 +98,7 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 0.0f;
 
 		shop.gameObject.SetActive(true);
+		Cursor.lockState = CursorLockMode.None;
 
 		InShop = true;
 	}
@@ -112,7 +109,7 @@ public class GameManager : MonoBehaviour
 
 		InShop = false;
 
-		if(!InShop && !Paused) { Time.timeScale = 1.0f; }
+		if(!InShop && !Paused) { Time.timeScale = 1.0f; Cursor.lockState = CursorLockMode.Confined; }
 	}
 
 	public void Pause()
@@ -120,6 +117,7 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 0.0f;
 
 		pause.gameObject.SetActive(true);
+		Cursor.lockState = CursorLockMode.None;
 
 		Paused = true;
 	}
@@ -130,7 +128,7 @@ public class GameManager : MonoBehaviour
 
 		Paused = false;
 
-		if (!InShop && !Paused) { Time.timeScale = 1.0f; }
+		if (!InShop && !Paused) { Time.timeScale = 1.0f; Cursor.lockState = CursorLockMode.Confined; }
 	}
 
 	public void GoToMainMenu()
@@ -143,6 +141,7 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 1.0f;
 		shop.gameObject.SetActive(true);
 		pause.gameObject.SetActive(true);
+		Cursor.lockState = CursorLockMode.Confined;
 
 		SceneLoader.LoadLevel("MainMenu");
 	}
@@ -152,5 +151,6 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 0.0f;
 
 		death.gameObject.SetActive(true);
+		Cursor.lockState = CursorLockMode.None;
 	}
 }
