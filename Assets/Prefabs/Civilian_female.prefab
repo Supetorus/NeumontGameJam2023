@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4037765931794684169}
   - component: {fileID: 6866827355515442586}
   m_Layer: 0
-  m_Name: ArmedCivilian
+  m_Name: Civilian_female
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b24b31dde32d9134788136299179a2c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6336e8d6bd10f84daefc77e4406d659, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -165,13 +165,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weapon:
     SweepingAngle: 45
-    Damage: 5
+    Damage: 10
     Knockback: 2
     AttackSpeed: 0.5
     AttackRange: 1
-    WeaponSprite: {fileID: 21300000, guid: 6f4e854625a18574b914f7cf70f75f4e, type: 3}
-    SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
-    SwingSound: {fileID: 8300000, guid: 8325d78d887a40f4498c0d94a876b2eb, type: 3}
+    WeaponSprite: {fileID: 0}
+    SweepSprite: {fileID: 0}
   m_WalkSpeed: 2
   m_RunSpeed: 4
   m_MaxHealth: 100
@@ -184,7 +183,7 @@ MonoBehaviour:
   m_DamageEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_IsWeaponEnabled: 1
+  m_IsWeaponEnabled: 0
 --- !u!114 &6866827355515442586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6854ee48671b35f4e818d3cb77e3c4b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flees: 0
+  flees: 1
   aggroAlertRadius: 5
   minAttackDistance: 1
   firstAttackDelay: 0.1
