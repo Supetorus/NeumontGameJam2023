@@ -1567,7 +1567,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: de263c416de13dc4382d46c3033930eb, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1696,6 +1696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5784573629513855421, guid: b2d0369ef073414408a9c2ad45368dd7, type: 3}
+  shopScoreMultiplier: 2
 --- !u!1 &1763404597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,7 +1968,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862526413}
   m_CullTransparentMesh: 1
-  shopScoreMultiplier: 1.5
 --- !u!1 &2017986918
 GameObject:
   m_ObjectHideFlags: 0
