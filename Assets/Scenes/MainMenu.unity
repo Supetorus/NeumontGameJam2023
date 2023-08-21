@@ -1370,6 +1370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5784573629513855421, guid: b2d0369ef073414408a9c2ad45368dd7, type: 3}
+  shopScoreMultiplier: 1.5
 --- !u!1 &2017986918
 GameObject:
   m_ObjectHideFlags: 0

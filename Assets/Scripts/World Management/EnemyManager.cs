@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-	private static readonly int MAX_ENEMIES = 20;
 	private static readonly float MAX_ENEMY_DISTANCE_X = 15.0f;
 	private static readonly float MAX_ENEMY_DISTANCE_Y = 8.0f;
 
@@ -17,6 +16,10 @@ public class EnemyManager : MonoBehaviour
 		public float weightIncrease;
 	}
 
+	[SerializeField, Tooltip("The base number of enemies in the game at the start.")]
+	private int baseMobCap = 20;
+	[SerializeField, Tooltip("This is multiplied by the current score and added to the base enemy amount to calculate the mob cap.")]
+	private float enemyCapMultiplier = 5;
 	[SerializeField] private List<EnemySpawn> enemyPrefabs;
 
 	private List<GameObject> spawnedEnemies = new List<GameObject>();
@@ -30,7 +33,7 @@ public class EnemyManager : MonoBehaviour
 
 	private void Update()
 	{
-		int maxEnemies = MAX_ENEMIES + GameManager.Instance.Score / 10;
+		int maxEnemies = baseMobCap + (int)(GameManager.Instance.Score / enemyCapMultiplier);
 
 		spawnWeight = 0.0f;
 

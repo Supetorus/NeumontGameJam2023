@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 	public GameObject Player { get; private set; }
 
 	public int Score { get; private set; } = 0;
+	[SerializeField, Tooltip("How much the score must increase by to get to the next shop screen")]
+	private float shopScoreMultiplier = 2;
 
 	private int scoreGoal = 5;
 
@@ -91,7 +93,7 @@ public class GameManager : MonoBehaviour
 	{
 		hud.SetScore(++Score);
 
-		if (Score == scoreGoal) { OpenShop(); scoreGoal *= 2; }
+		if (Score == scoreGoal) { OpenShop(); scoreGoal = (int)(shopScoreMultiplier * scoreGoal); }
 	}
 
 	public void OpenShop()
