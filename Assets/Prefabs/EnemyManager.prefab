@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e604be4dba12ed4ab027ee09a77f90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseMobCap: 20
+  enemyCapMultiplier: 5
   enemyPrefabs:
   - prefab: {fileID: 116153852744238503, guid: dd22f015c6ae8e346854ba88720a50d2, type: 3}
     weight: 4.5
@@ -53,10 +55,10 @@ MonoBehaviour:
     weightIncrease: 0
   - prefab: {fileID: 116153852744238503, guid: da04df98ec3ca9d43b50e44833574d05, type: 3}
     weight: 0.15
-    weightIncrease: 0.5
+    weightIncrease: 1
   - prefab: {fileID: 116153852744238503, guid: 3b7e295cf06c67a4ba090d2cd266acd8, type: 3}
     weight: 0.15
-    weightIncrease: 0.5
+    weightIncrease: 1
   - prefab: {fileID: 116153852744238503, guid: 947c0de2d09b06b45ac84072f289ae03, type: 3}
     weight: 0.7
     weightIncrease: 2
