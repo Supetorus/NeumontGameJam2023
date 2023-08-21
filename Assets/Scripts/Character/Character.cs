@@ -44,6 +44,8 @@ public class Character : MonoBehaviour
 	private float m_KnockbackScale = 1;
 	[SerializeField, Tooltip("The slider representing the health of this character")]
 	private Fillbar m_HealthBar;
+	[SerializeField]
+	private AudioClip hit;
 
 	private float m_Health;
 	private Vector2 m_LookDirection = new Vector2(0, 0);
@@ -174,6 +176,7 @@ public class Character : MonoBehaviour
 
 	public void Damage(float damage, Vector2 knockback)
 	{
+		if (hit != null) { m_Audio.PlayOneShot(hit); }
 		m_Health -= damage;
 		m_Health = Mathf.Clamp(m_Health, 0, m_MaxHealth);
 

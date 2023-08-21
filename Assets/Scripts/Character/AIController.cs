@@ -27,11 +27,12 @@ public class AIController : MonoBehaviour
 		{ 
 			bool wasAggro = isAggro; 
 			isAggro = value; 
-			if (!wasAggro && isAggro && alertSound != null) { character.GetComponent<AudioSource>().PlayOneShot(alertSound); } 
+			if (!wasAggro && isAggro && alertSound != null) { audio.PlayOneShot(alertSound); } 
 		} 
 	}
 	private Character character;
 	private GameObject player;
+	private new AudioSource audio;
 	private float currentAngle;
 	private bool isDead;
 	private float firstAttackTimer = 0;
@@ -49,6 +50,7 @@ public class AIController : MonoBehaviour
 		character.m_DamageEvent.AddListener(DamageTaken);
 		character.m_DeathEvent.AddListener(OnDeath);
 		player = GameManager.Instance.Player;
+		audio = GetComponent<AudioSource>();
 
 		character.m_ComponentFilter = new System.Type[] { typeof(PlayerController) };
 	}
