@@ -38,7 +38,7 @@ public class AIController : MonoBehaviour
 		character = GetComponent<Character>();
 		character.m_DamageEvent.AddListener(DamageTaken);
 		character.m_DeathEvent.AddListener(OnDeath);
-		player = FindObjectOfType<GameManager>().Player;
+		player = GameManager.Instance.Player;
 
 		character.m_ComponentFilter = new System.Type[] { typeof(PlayerController) };
 	}
@@ -48,7 +48,9 @@ public class AIController : MonoBehaviour
 		character.SetWeaponEnabled(isAggro && !flees);
 		if (isDead) return;
 		Vector2 moveDirection;
-		float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
+		float distToPlayer = float.MaxValue;
+		if (player != null) { distToPlayer = Vector3.Distance(transform.position, player.transform.position); }
+		
 		if (isAggro)
 		{
 			Vector2 toPlayer = player.transform.position - transform.position;
