@@ -58,15 +58,13 @@ public class AIController : MonoBehaviour
 		character.SetWeaponEnabled(isAggro && !flees);
 		if (isDead) return;
 		Vector2 moveDirection;
-		float distToPlayer = float.MaxValue;
-		if (player != null) { distToPlayer = Vector3.Distance(transform.position, player.transform.position); }
 		
 		if (isAggro)
 		{
-			Vector2 toPlayer = player.transform.position - transform.position;
-			moveDirection = flees ? -toPlayer : toPlayer;
+			Vector2 towardPlayer = player.transform.position - transform.position;
+			moveDirection = flees ? -towardPlayer : towardPlayer;
 
-			if (!flees && character.InAttackRange(transform.position))
+			if (!flees && character.InAttackRange(player.transform.position))
 			{
 				firstAttackTimer += Time.deltaTime;
 				if (firstAttackTimer > firstAttackDelay)
@@ -104,6 +102,9 @@ public class AIController : MonoBehaviour
 			moveDirection = Vector2.zero;
 		}
 		character.SetSprint(isAggro);
+
+		float distToPlayer = float.MaxValue;
+		if (player != null) { distToPlayer = Vector3.Distance(transform.position, player.transform.position); }
 
 		if (distToPlayer >= 1.0001)
 			character.Move(moveDirection);
