@@ -46,37 +46,45 @@ public class MenuEnemyManager : MonoBehaviour
 
 		if (spawnedEnemies.Count < maxEnemies)
 		{
+			GameObject go = null;
+
 			switch (Random.Range(0, 4))
 			{
 				case 0:
-				{
-					spawnedEnemies.Add(Instantiate(enemyPrefabs[GetWeightedSpawn()].prefab,
-						new Vector3(pos.x + Random.Range(-MAX_ENEMY_DISTANCE_X - 5.0f, -MAX_ENEMY_DISTANCE_X),
-						pos.y + Random.Range(-MAX_ENEMY_DISTANCE_Y, MAX_ENEMY_DISTANCE_Y), 0.0f), Quaternion.identity));
-				}
-				break;
+					{
+						go = Instantiate(enemyPrefabs[GetWeightedSpawn()].prefab,
+							new Vector3(pos.x + Random.Range(-MAX_ENEMY_DISTANCE_X - 5.0f, -MAX_ENEMY_DISTANCE_X),
+							pos.y + Random.Range(-MAX_ENEMY_DISTANCE_Y, MAX_ENEMY_DISTANCE_Y), 0.0f), Quaternion.identity);
+						spawnedEnemies.Add(go);
+					}
+					break;
 				case 1:
-				{
-					spawnedEnemies.Add(Instantiate(enemyPrefabs[GetWeightedSpawn()].prefab,
-						new Vector3(pos.x + Random.Range(MAX_ENEMY_DISTANCE_X, MAX_ENEMY_DISTANCE_X + 5.0f),
-						pos.y + Random.Range(-MAX_ENEMY_DISTANCE_Y, MAX_ENEMY_DISTANCE_Y), 0.0f), Quaternion.identity));
-				}
-				break;
+					{
+						go = Instantiate(enemyPrefabs[GetWeightedSpawn()].prefab,
+							new Vector3(pos.x + Random.Range(MAX_ENEMY_DISTANCE_X, MAX_ENEMY_DISTANCE_X + 5.0f),
+							pos.y + Random.Range(-MAX_ENEMY_DISTANCE_Y, MAX_ENEMY_DISTANCE_Y), 0.0f), Quaternion.identity);
+						spawnedEnemies.Add(go);
+					}
+					break;
 				case 2:
-				{
-					spawnedEnemies.Add(Instantiate(enemyPrefabs[GetWeightedSpawn()].prefab,
+					{
+						go = Instantiate(enemyPrefabs[GetWeightedSpawn()].prefab,
 						new Vector3(pos.x + Random.Range(-MAX_ENEMY_DISTANCE_X, MAX_ENEMY_DISTANCE_X),
-						pos.y + Random.Range(-MAX_ENEMY_DISTANCE_Y - 5.0f, -MAX_ENEMY_DISTANCE_Y), 0.0f), Quaternion.identity));
-				}
-				break;
+						pos.y + Random.Range(-MAX_ENEMY_DISTANCE_Y - 5.0f, -MAX_ENEMY_DISTANCE_Y), 0.0f), Quaternion.identity);
+						spawnedEnemies.Add(go);
+					}
+					break;
 				case 3:
-				{
-					spawnedEnemies.Add(Instantiate(enemyPrefabs[GetWeightedSpawn()].prefab,
+					{
+						go = Instantiate(enemyPrefabs[GetWeightedSpawn()].prefab,
 						new Vector3(pos.x + Random.Range(-MAX_ENEMY_DISTANCE_X, MAX_ENEMY_DISTANCE_X),
-						pos.y + Random.Range(MAX_ENEMY_DISTANCE_Y, MAX_ENEMY_DISTANCE_Y + 5.0f), 0.0f), Quaternion.identity));
-				}
-				break;
+						pos.y + Random.Range(MAX_ENEMY_DISTANCE_Y, MAX_ENEMY_DISTANCE_Y + 5.0f), 0.0f), Quaternion.identity);
+						spawnedEnemies.Add(go);
+					}
+					break;
 			}
+
+			Destroy(go.GetComponentInChildren<Fillbar>().gameObject);
 		}
 	}
 
@@ -98,16 +106,5 @@ public class MenuEnemyManager : MonoBehaviour
 		}
 
 		return 0;
-	}
-
-	public void EnemyDeath(GameObject enemy)
-	{
-		spawnedEnemies.Remove(enemy);
-		GameManager.Instance.AddScore();
-	}
-
-	public void Despawn(GameObject enemy)
-	{
-		spawnedEnemies.Remove(enemy);
 	}
 }
