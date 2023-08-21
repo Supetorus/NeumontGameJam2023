@@ -10,8 +10,6 @@ public class AIController : MonoBehaviour
 	private bool flees;
 	[SerializeField, Tooltip("How far away from this AI other AI will become aggro")]
 	private float aggroAlertRadius;
-	[SerializeField, Tooltip("How close this character has to be to the player to attack")]
-	private float minAttackDistance = 1;
 	[SerializeField, Tooltip("How long the AI has to wait before it's first attack when it's in range")]
 	private float firstAttackDelay = 0.1f;
 	[SerializeField, Tooltip("How much the direction can change while wandering, ie how wildly the ai wanders."), Range(0, 180)]
@@ -68,7 +66,7 @@ public class AIController : MonoBehaviour
 			Vector2 toPlayer = player.transform.position - transform.position;
 			moveDirection = flees ? -toPlayer : toPlayer;
 
-			if (!flees && distToPlayer < minAttackDistance)
+			if (!flees && character.InAttackRange(transform.position))
 			{
 				firstAttackTimer += Time.deltaTime;
 				if (firstAttackTimer > firstAttackDelay)

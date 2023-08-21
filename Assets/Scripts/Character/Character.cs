@@ -161,6 +161,11 @@ public class Character : MonoBehaviour
 
 	public Weapon GetWeapon() { return m_Weapon; }
 
+	public bool InAttackRange(Vector3 position)
+	{
+		return Vector3.Distance(transform.position, position) < m_Weapon.AttackRange;
+	}
+
 	public void Heal()
 	{
 		m_Health = m_MaxHealth;
