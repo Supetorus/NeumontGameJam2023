@@ -18,6 +18,8 @@ public class Shop : MonoBehaviour
 
 		if (GameManager.Instance == null)
 			return;
+		if (GameManager.Instance.Player == null)
+			return;
 
 		Character player = GameManager.Instance.Player?.GetComponent<Character>();
 
