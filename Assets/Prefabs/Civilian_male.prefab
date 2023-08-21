@@ -173,6 +173,7 @@ MonoBehaviour:
     WeaponSprite: {fileID: 0}
     SweepSprite: {fileID: 0}
     SwingSound: {fileID: 0}
+    Upgrades: 
   m_WalkSpeed: 2
   m_RunSpeed: 4
   m_MaxHealth: 100
@@ -201,7 +202,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flees: 1
   aggroAlertRadius: 5
-  minAttackDistance: 1
   firstAttackDelay: 0.1
   directionChangeRange: 15
   doWander: 1
@@ -262,7 +262,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
