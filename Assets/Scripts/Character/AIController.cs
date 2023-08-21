@@ -119,7 +119,9 @@ public class AIController : MonoBehaviour
 		isDead = true;
 		GetComponent<Collider2D>().enabled = false;
 		character.Move(Vector2.zero);
-		GetComponent<SpriteRenderer>().color = Color.red;
+		var sprite = GetComponent<SpriteRenderer>();
+		sprite.color = Color.red;
+		sprite.sortingLayerName = "DeadCharacters";
 		StartCoroutine(DeathAnimation());
 		deadPeople.Enqueue(this);
 		while (deadPeople.Count > maxDeadBodies)
