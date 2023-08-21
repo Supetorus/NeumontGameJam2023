@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 	public GameManager()
 	{
 		if (Instance == null) { Instance = this; }
-		else if(this != Instance) { destroy = true; }
+		else if (this != Instance) { destroy = true; }
 	}
 
 	private void Awake()
@@ -56,14 +57,14 @@ public class GameManager : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape) && InGame)
 		{
-			if(Paused) { Unpause(); }
+			if (Paused) { Unpause(); }
 			else { Pause(); }
 		}
 	}
 
 	public void OnSceneLoad(Scene scene, LoadSceneMode mode)
 	{
-		if(scene.name == "Game" && Player == null)
+		if (scene.name == "Game" && Player == null)
 		{
 			Player = Instantiate(playerPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
 			hud = FindFirstObjectByType<HUD>();
@@ -90,17 +91,37 @@ public class GameManager : MonoBehaviour
 	{
 		hud.SetScore(++Score);
 
-		if(Score == scoreGoal) { OpenShop(); scoreGoal *= 2; }
+		if (Score == scoreGoal) { OpenShop(); scoreGoal *= 2; }
 	}
 
 	public void OpenShop()
 	{
 		Time.timeScale = 0.0f;
 
-		shop.gameObject.SetActive(true);
+		//shop.gameObject.SetActive(true);
+		StartCoroutine(ShowShop());
 		Cursor.lockState = CursorLockMode.None;
 
 		InShop = true;
+	}
+
+	private IEnumerator ShowShop()
+	{
+		shop.gameObject.SetActive(true);
+		float duration = 0.5f;
+		var rect = shop.transform.GetChild(0).GetComponent<RectTransform>();
+		float elapsedTime = 0f;
+
+		while (elapsedTime < duration)
+		{
+			float t = elapsedTime / duration;
+			float scale = Mathf.Lerp(0, 1, t);
+			rect.localScale = Vector3.one * scale;
+
+			elapsedTime += 0.05f;
+			yield return new WaitForSecondsRealtime(0.05f);
+		}
+		rect.localScale = Vector3.one;
 	}
 
 	public void CloseShop()
@@ -109,7 +130,7 @@ public class GameManager : MonoBehaviour
 
 		InShop = false;
 
-		if(!InShop && !Paused) { Time.timeScale = 1.0f; Cursor.lockState = CursorLockMode.Confined; }
+		if (!InShop && !Paused) { Time.timeScale = 1.0f; Cursor.lockState = CursorLockMode.Confined; }
 	}
 
 	public void Pause()
