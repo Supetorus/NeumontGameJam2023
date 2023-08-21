@@ -18,8 +18,18 @@ public class AIController : MonoBehaviour
 	private float directionChangeRange = 15;
 	[SerializeField, Tooltip("Disable wandering for testing")]
 	private bool doWander = true;
+	[SerializeField, Tooltip("The sound that plays when they are alerted")]
+	private AudioClip alertSound;
 
 	private bool isAggro;
+	private bool IsAggro { get { return isAggro; } 
+		set 
+		{ 
+			bool wasAggro = isAggro; 
+			isAggro = value; 
+			if (!wasAggro && isAggro && alertSound != null) { character.GetComponent<AudioSource>().PlayOneShot(alertSound); } 
+		} 
+	}
 	private Character character;
 	private GameObject player;
 	private float currentAngle;
@@ -102,13 +112,13 @@ public class AIController : MonoBehaviour
 
 	private void DamageTaken()
 	{
-		isAggro = true;
+		IsAggro = true;
 		var nearby = Physics2D.OverlapCircleAll(transform.position, aggroAlertRadius);
 		foreach (var collider in nearby)
 		{
 			if (collider.TryGetComponent<AIController>(out var aiController))
 			{
-				aiController.isAggro = true;
+				aiController.IsAggro = true;
 			}
 		}
 	}
