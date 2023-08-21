@@ -8,11 +8,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class Character : MonoBehaviour
 {
 	private SpriteRenderer m_Renderer;
 	private Rigidbody2D m_Rigidbody;
 	private CircleCollider2D m_Collider;
+	private AudioSource m_Audio;
 
 	private GameObject m_WeaponObject;
 	private SpriteRenderer m_WeaponSprite;
@@ -84,6 +86,9 @@ public class Character : MonoBehaviour
 		// movement / physics
 		m_Collider = GetComponent<CircleCollider2D>();
 		m_Rigidbody = GetComponent<Rigidbody2D>();
+
+		// audio
+		m_Audio = GetComponent<AudioSource>();
 
 		m_Collider.radius = 0.5f;
 
@@ -201,11 +206,7 @@ public class Character : MonoBehaviour
 			// play audio
 			if (m_Weapon.SwingSound)
 			{
-				GameObject audioObject = new GameObject();
-				AudioSource audioSrc = audioObject.AddComponent<AudioSource>();
-				audioSrc.clip = m_Weapon.SwingSound;
-				audioSrc.Play();
-				Destroy(audioObject, audioSrc.clip.length+0.5f);
+				m_Audio.PlayOneShot(m_Weapon.SwingSound);
 			}
 
 			// animate sprite

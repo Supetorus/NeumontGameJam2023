@@ -203,6 +203,7 @@ MonoBehaviour:
   firstAttackDelay: 0.1
   directionChangeRange: 15
   doWander: 1
+  alertSound: {fileID: 8300000, guid: 88a9ba36acbd641449bdab2e130ffc89, type: 3}
 --- !u!1 &3627973427447140753
 GameObject:
   m_ObjectHideFlags: 0
