@@ -161,8 +161,8 @@ public class GameManager : MonoBehaviour
 		scoreGoal = 5;
 
 		Time.timeScale = 1.0f;
-		shop.gameObject.SetActive(true);
-		pause.gameObject.SetActive(true);
+		//shop.gameObject.SetActive(true);
+		//pause.gameObject.SetActive(true);
 		Cursor.lockState = CursorLockMode.Confined;
 
 		SceneLoader.LoadLevel("MainMenu");

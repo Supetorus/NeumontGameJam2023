@@ -3142,9 +3142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - SweepingAngle: 30
-    Damage: 25
+    Damage: 20
     Knockback: 5
-    AttackSpeed: 0.1
+    AttackSpeed: 0.15
     AttackRange: 1
     WeaponSprite: {fileID: 21300000, guid: 71b3b2390ddd00e4c9488cef0cc9cce3, type: 3}
     SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
@@ -3152,7 +3152,7 @@ MonoBehaviour:
   - SweepingAngle: 45
     Damage: 40
     Knockback: 7
-    AttackSpeed: 0.3
+    AttackSpeed: 0.2
     AttackRange: 1
     WeaponSprite: {fileID: 21300000, guid: 7c77999ca74f87249b2ed18881a24953, type: 3}
     SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
@@ -3160,7 +3160,7 @@ MonoBehaviour:
   - SweepingAngle: 90
     Damage: 50
     Knockback: 8
-    AttackSpeed: 0.3
+    AttackSpeed: 0.4
     AttackRange: 1.5
     WeaponSprite: {fileID: 21300000, guid: 8290cae9271fb4948acd9a9b97816225, type: 3}
     SweepSprite: {fileID: 21300000, guid: 50f07e14c4ae0754285ca1bc44652eeb, type: 3}
@@ -3168,7 +3168,7 @@ MonoBehaviour:
   - SweepingAngle: 120
     Damage: 60
     Knockback: 15
-    AttackSpeed: 1
+    AttackSpeed: 0.8
     AttackRange: 1.5
     WeaponSprite: {fileID: 21300000, guid: 48021c375cfac4241a8600f235f39715, type: 3}
     SweepSprite: {fileID: 21300000, guid: 81b1b3a73a8869441b5a9d7446efff9c, type: 3}
@@ -3176,7 +3176,7 @@ MonoBehaviour:
   - SweepingAngle: 120
     Damage: 80
     Knockback: 10
-    AttackSpeed: 1
+    AttackSpeed: 0.8
     AttackRange: 1.5
     WeaponSprite: {fileID: 21300000, guid: e84c6c1d11509d54181b32be13cc95cd, type: 3}
     SweepSprite: {fileID: 21300000, guid: 81b1b3a73a8869441b5a9d7446efff9c, type: 3}
