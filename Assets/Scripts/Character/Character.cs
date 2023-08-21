@@ -159,6 +159,8 @@ public class Character : MonoBehaviour
 		m_SweepSprite.sprite = weapon.SweepSprite;
 	}
 
+	public Weapon GetWeapon() { return m_Weapon; }
+
 	public void Heal()
 	{
 		m_Health = m_MaxHealth;

@@ -261,6 +261,7 @@ MonoBehaviour:
     WeaponSprite: {fileID: 21300000, guid: 6f4e854625a18574b914f7cf70f75f4e, type: 3}
     SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
     SwingSound: {fileID: 8300000, guid: 946f86526d806f14795721d45ea9a873, type: 3}
+    Upgrades: 00000000
   m_WalkSpeed: 4
   m_RunSpeed: 8
   m_MaxHealth: 100

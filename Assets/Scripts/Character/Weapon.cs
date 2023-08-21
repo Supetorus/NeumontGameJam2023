@@ -16,5 +16,6 @@ public struct Weapon
 
 	public AudioClip SwingSound;
 
+	public List<int> Upgrades;
 
 }
