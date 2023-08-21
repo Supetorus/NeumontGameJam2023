@@ -3202,6 +3202,7 @@ MonoBehaviour:
     AttackRange: 1
     WeaponSprite: {fileID: 21300000, guid: 71b3b2390ddd00e4c9488cef0cc9cce3, type: 3}
     SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
+    SwingSound: {fileID: 8300000, guid: e15d57818ce760c43acc903afd1a768f, type: 3}
   - SweepingAngle: 45
     Damage: 40
     Knockback: 7
@@ -3209,6 +3210,7 @@ MonoBehaviour:
     AttackRange: 1
     WeaponSprite: {fileID: 21300000, guid: 7c77999ca74f87249b2ed18881a24953, type: 3}
     SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
+    SwingSound: {fileID: 8300000, guid: a0dbae565c2b3c64b961882eceeab9b3, type: 3}
   - SweepingAngle: 90
     Damage: 50
     Knockback: 8
@@ -3216,6 +3218,7 @@ MonoBehaviour:
     AttackRange: 1.5
     WeaponSprite: {fileID: 21300000, guid: 8290cae9271fb4948acd9a9b97816225, type: 3}
     SweepSprite: {fileID: 21300000, guid: 50f07e14c4ae0754285ca1bc44652eeb, type: 3}
+    SwingSound: {fileID: 8300000, guid: 4972676ead5c75c45996b2bae8e705f8, type: 3}
   - SweepingAngle: 120
     Damage: 60
     Knockback: 15
@@ -3223,6 +3226,7 @@ MonoBehaviour:
     AttackRange: 1.5
     WeaponSprite: {fileID: 21300000, guid: 48021c375cfac4241a8600f235f39715, type: 3}
     SweepSprite: {fileID: 21300000, guid: 81b1b3a73a8869441b5a9d7446efff9c, type: 3}
+    SwingSound: {fileID: 8300000, guid: 491ea7d01f4637f4a837b77b9c25a198, type: 3}
   - SweepingAngle: 120
     Damage: 80
     Knockback: 10
@@ -3230,6 +3234,7 @@ MonoBehaviour:
     AttackRange: 1.5
     WeaponSprite: {fileID: 21300000, guid: e84c6c1d11509d54181b32be13cc95cd, type: 3}
     SweepSprite: {fileID: 21300000, guid: 81b1b3a73a8869441b5a9d7446efff9c, type: 3}
+    SwingSound: {fileID: 8300000, guid: 491ea7d01f4637f4a837b77b9c25a198, type: 3}
   weaponOptions:
   - {fileID: 1606610990}
   - {fileID: 1741323541}

@@ -198,11 +198,23 @@ public class Character : MonoBehaviour
 		{
 			m_NextAttackTime = Time.time + m_Weapon.AttackSpeed;
 
+			// play audio
+			if (m_Weapon.SwingSound)
+			{
+				GameObject audioObject = new GameObject();
+				AudioSource audioSrc = audioObject.AddComponent<AudioSource>();
+				audioSrc.clip = m_Weapon.SwingSound;
+				audioSrc.Play();
+				Destroy(audioObject, audioSrc.clip.length+0.5f);
+			}
+
+			// animate sprite
 			m_SweepSprite.flipX = m_WeaponSprite.flipX;
 			m_WeaponSprite.flipX = !m_WeaponSprite.flipX;
 			m_SweepObject.SetActive(true);
 			m_DisableSweepSpritTime = Time.time + 0.1f;
 
+			// attack
 			Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, m_Weapon.AttackRange);
 
 			foreach (var collision in collisions)

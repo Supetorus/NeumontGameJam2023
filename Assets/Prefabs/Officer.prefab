@@ -171,6 +171,7 @@ MonoBehaviour:
     AttackRange: 1
     WeaponSprite: {fileID: 21300000, guid: 7c77999ca74f87249b2ed18881a24953, type: 3}
     SweepSprite: {fileID: 21300000, guid: 2f971ce11821214438ade57ed4f3d97c, type: 3}
+    SwingSound: {fileID: 8300000, guid: a0dbae565c2b3c64b961882eceeab9b3, type: 3}
   m_WalkSpeed: 2
   m_RunSpeed: 4
   m_MaxHealth: 150
