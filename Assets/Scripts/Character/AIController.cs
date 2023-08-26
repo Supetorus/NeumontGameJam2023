@@ -144,9 +144,8 @@ public class AIController : MonoBehaviour
 	private const float timeToDie = 0.5f;
 	private IEnumerator DeathAnimation()
 	{
-		bool flip = System.Convert.ToBoolean(Random.Range(0, 1));
 		Quaternion startRotation = transform.rotation;
-		Quaternion targetRotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + (flip ? -90 : 90));
+		Quaternion targetRotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + (Random.Range(0, 2) == 0 ? -90 : 90));
 
 		float elapsedTime = 0.0f;
 
