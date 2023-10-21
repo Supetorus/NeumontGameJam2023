@@ -8,11 +8,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class Character : MonoBehaviour
 {
 	private SpriteRenderer m_Renderer;
 	private Rigidbody2D m_Rigidbody;
 	private CircleCollider2D m_Collider;
+	private AudioSource m_Audio;
 
 	private GameObject m_WeaponObject;
 	private SpriteRenderer m_WeaponSprite;
@@ -42,6 +44,8 @@ public class Character : MonoBehaviour
 	private float m_KnockbackScale = 1;
 	[SerializeField, Tooltip("The slider representing the health of this character")]
 	private Fillbar m_HealthBar;
+	[SerializeField]
+	private AudioClip hit;
 
 	private float m_Health;
 	private Vector2 m_LookDirection = new Vector2(0, 0);
@@ -84,6 +88,9 @@ public class Character : MonoBehaviour
 		// movement / physics
 		m_Collider = GetComponent<CircleCollider2D>();
 		m_Rigidbody = GetComponent<Rigidbody2D>();
+
+		// audio
+		m_Audio = GetComponent<AudioSource>();
 
 		m_Collider.radius = 0.5f;
 
@@ -152,6 +159,13 @@ public class Character : MonoBehaviour
 		m_SweepSprite.sprite = weapon.SweepSprite;
 	}
 
+	public Weapon GetWeapon() { return m_Weapon; }
+
+	public bool InAttackRange(Vector3 position)
+	{
+		return Vector3.Distance(transform.position, position) < m_Weapon.AttackRange;
+	}
+
 	public void Heal()
 	{
 		m_Health = m_MaxHealth;
@@ -169,6 +183,7 @@ public class Character : MonoBehaviour
 
 	public void Damage(float damage, Vector2 knockback)
 	{
+		if (hit != null) { m_Audio.PlayOneShot(hit); }
 		m_Health -= damage;
 		m_Health = Mathf.Clamp(m_Health, 0, m_MaxHealth);
 
@@ -198,11 +213,19 @@ public class Character : MonoBehaviour
 		{
 			m_NextAttackTime = Time.time + m_Weapon.AttackSpeed;
 
+			// play audio
+			if (m_Weapon.SwingSound)
+			{
+				m_Audio.PlayOneShot(m_Weapon.SwingSound);
+			}
+
+			// animate sprite
 			m_SweepSprite.flipX = m_WeaponSprite.flipX;
 			m_WeaponSprite.flipX = !m_WeaponSprite.flipX;
 			m_SweepObject.SetActive(true);
 			m_DisableSweepSpritTime = Time.time + 0.1f;
 
+			// attack
 			Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, m_Weapon.AttackRange);
 
 			foreach (var collision in collisions)

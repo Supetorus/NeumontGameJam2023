@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
 		if(Input.GetMouseButtonDown(0))
 			m_Character.Attack();
 
+#if UNITY_EDITOR
+		if(Input.GetKeyDown(KeyCode.H))
+			m_Character.Heal();
+#endif
+
 		GameManager.Instance.SetHealth(m_Character.GetHealthPercent());
 	}
 

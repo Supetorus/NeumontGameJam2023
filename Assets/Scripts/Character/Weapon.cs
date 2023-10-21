@@ -14,5 +14,8 @@ public struct Weapon
 	public Sprite WeaponSprite;
 	public Sprite SweepSprite;
 
+	public AudioClip SwingSound;
+
+	public List<int> Upgrades;
 
 }

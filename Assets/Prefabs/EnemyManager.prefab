@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &595209327061872972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7124929948984649149}
+  - component: {fileID: 2217584197397036113}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7124929948984649149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595209327061872972}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.890737, y: -2.1366236, z: -0.6242758}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2217584197397036113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595209327061872972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e604be4dba12ed4ab027ee09a77f90a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMobCap: 20
+  enemyCapMultiplier: 5
+  enemyPrefabs:
+  - prefab: {fileID: 116153852744238503, guid: dd22f015c6ae8e346854ba88720a50d2, type: 3}
+    weight: 4.5
+    weightIncrease: 0
+  - prefab: {fileID: 116153852744238503, guid: 19310ae1e4e557b4a8a71b08f1703edc, type: 3}
+    weight: 4.5
+    weightIncrease: 0
+  - prefab: {fileID: 116153852744238503, guid: da04df98ec3ca9d43b50e44833574d05, type: 3}
+    weight: 0.15
+    weightIncrease: 1
+  - prefab: {fileID: 116153852744238503, guid: 3b7e295cf06c67a4ba090d2cd266acd8, type: 3}
+    weight: 0.15
+    weightIncrease: 1
+  - prefab: {fileID: 116153852744238503, guid: 947c0de2d09b06b45ac84072f289ae03, type: 3}
+    weight: 0.7
+    weightIncrease: 2

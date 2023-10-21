@@ -10,18 +10,27 @@ public class AIController : MonoBehaviour
 	private bool flees;
 	[SerializeField, Tooltip("How far away from this AI other AI will become aggro")]
 	private float aggroAlertRadius;
-	[SerializeField, Tooltip("How close this character has to be to the player to attack")]
-	private float minAttackDistance = 1;
 	[SerializeField, Tooltip("How long the AI has to wait before it's first attack when it's in range")]
 	private float firstAttackDelay = 0.1f;
 	[SerializeField, Tooltip("How much the direction can change while wandering, ie how wildly the ai wanders."), Range(0, 180)]
 	private float directionChangeRange = 15;
 	[SerializeField, Tooltip("Disable wandering for testing")]
 	private bool doWander = true;
+	[SerializeField, Tooltip("The sound that plays when they are alerted")]
+	private AudioClip alertSound;
 
 	private bool isAggro;
+	private bool IsAggro { get { return isAggro; } 
+		set 
+		{ 
+			bool wasAggro = isAggro; 
+			isAggro = value; 
+			if (!wasAggro && isAggro && alertSound != null) { audio.PlayOneShot(alertSound); } 
+		} 
+	}
 	private Character character;
 	private GameObject player;
+	private new AudioSource audio;
 	private float currentAngle;
 	private bool isDead;
 	private float firstAttackTimer = 0;
@@ -39,6 +48,7 @@ public class AIController : MonoBehaviour
 		character.m_DamageEvent.AddListener(DamageTaken);
 		character.m_DeathEvent.AddListener(OnDeath);
 		player = GameManager.Instance.Player;
+		audio = GetComponent<AudioSource>();
 
 		character.m_ComponentFilter = new System.Type[] { typeof(PlayerController) };
 	}
@@ -48,15 +58,13 @@ public class AIController : MonoBehaviour
 		character.SetWeaponEnabled(isAggro && !flees);
 		if (isDead) return;
 		Vector2 moveDirection;
-		float distToPlayer = float.MaxValue;
-		if (player != null) { distToPlayer = Vector3.Distance(transform.position, player.transform.position); }
 		
 		if (isAggro)
 		{
-			Vector2 toPlayer = player.transform.position - transform.position;
-			moveDirection = flees ? -toPlayer : toPlayer;
+			Vector2 towardPlayer = player.transform.position - transform.position;
+			moveDirection = flees ? -towardPlayer : towardPlayer;
 
-			if (!flees && distToPlayer < minAttackDistance)
+			if (!flees && character.InAttackRange(player.transform.position))
 			{
 				firstAttackTimer += Time.deltaTime;
 				if (firstAttackTimer > firstAttackDelay)
@@ -95,6 +103,9 @@ public class AIController : MonoBehaviour
 		}
 		character.SetSprint(isAggro);
 
+		float distToPlayer = float.MaxValue;
+		if (player != null) { distToPlayer = Vector3.Distance(transform.position, player.transform.position); }
+
 		if (distToPlayer >= 1.0001)
 			character.Move(moveDirection);
 		character.SetLookDirection(moveDirection);
@@ -102,13 +113,13 @@ public class AIController : MonoBehaviour
 
 	private void DamageTaken()
 	{
-		isAggro = true;
+		IsAggro = true;
 		var nearby = Physics2D.OverlapCircleAll(transform.position, aggroAlertRadius);
 		foreach (var collider in nearby)
 		{
 			if (collider.TryGetComponent<AIController>(out var aiController))
 			{
-				aiController.isAggro = true;
+				aiController.IsAggro = true;
 			}
 		}
 	}
@@ -119,7 +130,9 @@ public class AIController : MonoBehaviour
 		isDead = true;
 		GetComponent<Collider2D>().enabled = false;
 		character.Move(Vector2.zero);
-		GetComponent<SpriteRenderer>().color = Color.red;
+		var sprite = GetComponent<SpriteRenderer>();
+		sprite.color = Color.red;
+		sprite.sortingLayerName = "DeadCharacters";
 		StartCoroutine(DeathAnimation());
 		deadPeople.Enqueue(this);
 		while (deadPeople.Count > maxDeadBodies)
@@ -131,9 +144,8 @@ public class AIController : MonoBehaviour
 	private const float timeToDie = 0.5f;
 	private IEnumerator DeathAnimation()
 	{
-		bool flip = System.Convert.ToBoolean(Random.Range(0, 1));
 		Quaternion startRotation = transform.rotation;
-		Quaternion targetRotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + (flip ? -90 : 90));
+		Quaternion targetRotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + (Random.Range(0, 2) == 0 ? -90 : 90));
 
 		float elapsedTime = 0.0f;
 
