@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
 	public int Score { get; private set; } = 0;
 
-	private int scoreGoal = 5;
+	private int scoreGoal = 0;
 
 	private bool destroy = false;
 
@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
 		{
 			Player = Instantiate(playerPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
 			hud = FindFirstObjectByType<HUD>();
+			scoreGoal = 5;
+			hud.SetScore(Score);
+			hud.SetGoal(scoreGoal);
 			shop = FindFirstObjectByType<Shop>();
 			shop.gameObject.SetActive(false);
 			InShop = false;
@@ -90,7 +93,12 @@ public class GameManager : MonoBehaviour
 	{
 		hud.SetScore(++Score);
 
-		if(Score == scoreGoal) { OpenShop(); scoreGoal *= 2; }
+		if(Score == scoreGoal)
+		{
+			OpenShop();
+			scoreGoal *= 2;
+			hud.SetGoal(scoreGoal);
+		}
 	}
 
 	public void OpenShop()
